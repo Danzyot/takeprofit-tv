@@ -20,90 +20,140 @@ dark room, lit by nothing but the tube, with a single amber power LED as the
 only warm point in frame. That LED is the one piece of warmth that survives the
 journey, which is a nice beat to land on.
 
+## The style: western adult animation
+
+The look is **2D western adult animation** — the register of a modern American
+comic-book cartoon. Clean confident linework, cel shading in a few bold steps,
+heavy black shadow shapes, saturated comic colour, softly painted backgrounds
+sitting behind crisp character art.
+
+**Know the trade-off.** 2D cel is the harder ask of a video model: linework
+boils, outlines wobble frame to frame, flat fills band under compression.
+Stylised 3D with volumetric light is what these models do most reliably. This
+look is worth the extra rerolls, but budget for them and mitigate:
+
+- **Keep shots to 5 seconds** wherever a character is on screen — less time to
+  drift. Only the vortex, which has no character, earns 10s.
+- **Generate from a still, never from text.** A locked first frame is the single
+  biggest defence against boil.
+- **Keep backgrounds soft and uncluttered.** Wobble shows worst in busy painted
+  detail, and this style calls for soft backgrounds anyway.
+- **Grade with grain at the end.** A little grain masks a lot of shimmer.
+
+If the 2D boils past usefulness, the fallback is the stylised-3D string at the
+bottom of this file. Same shots, same beats.
+
+### The style string
+
+Paste into every shot, unchanged. Consistency comes from repeating it verbatim.
+
+> Western adult animation in the style of a modern American comic-book cartoon.
+> Clean confident 2D linework of even weight, cel shading in few bold tonal
+> steps, heavy black shadow shapes, saturated comic-book colour, softly painted
+> backgrounds behind crisp character art, dramatic rim light, subtle film grain.
+
 ## Look development comes first
 
 Before any video, generate **one still** that settles the look, then reference it
-in every shot. Everything else in this brief depends on that frame existing.
+everywhere. Reroll this single frame until it is right — it is the cheapest
+decision in the production and every shot inherits from it.
 
-The style is **stylised 3D with cinematic lighting** — the register of a modern
-animated feature. Colourful and characterful, but lit and graded like film.
-
-That is a deliberate move away from flat vector cartoon, for two reasons. Flat
-2D with hard outlines reads as clipart at video resolution, and it is the thing
-video models handle worst: linework boils, outlines wobble frame to frame, and
-flat fills band under compression. Volumetric light, soft shading and depth of
-field are what these models are genuinely good at, so a stylised-3D target gets
-you a better *and* more consistent result from the same credits.
-
-Generate the style frame in an image model (Gen-4 Image, or one of the image
-models hosted inside Runway), then save it as a Reference:
-
-> A warm stylised 3D animated still in the register of a modern animated
-> feature. A young man stands on a sunlit street of rounded pastel buildings,
-> caught mid-stride, looking back over his shoulder with a grin. Soft global
-> illumination, warm rim light along his shoulder, volumetric light shafts,
-> shallow depth of field, rich saturated colour, gentle film grain, filmic
-> colour grade.
-
-Reroll that one frame until the look is right. It is the cheapest decision in
-the whole production and every shot inherits from it.
-
-## Global style string
-
-Once the look frame is approved, paste this into every shot, unchanged.
-Consistency comes from repeating it verbatim, not rewording it each time.
-
-> Cinematic stylised 3D animation, modern animated feature quality. Rounded
-> appealing character design, soft global illumination, warm rim light,
-> volumetric light shafts, shallow depth of field, rich saturated colour,
-> subtle film grain, filmic colour grade.
+> A single frame from a western adult animated series. A young man stands on a
+> sunlit city street, caught mid-stride, looking back over his shoulder with a
+> grin. Clean confident 2D linework of even weight, cel shading in few bold
+> tonal steps, heavy black shadow shapes across his jaw and jacket, saturated
+> comic-book colour, softly painted background buildings behind crisp character
+> art, warm rim light along his shoulder, subtle film grain.
 
 ## The shots
 
-Each is a single continuous action with one camera move. Generate at least
-four takes of each.
+Each is a single continuous action with one camera move. Generate at least four
+takes of each.
+
+Every shot has **two prompts**. The *frame* prompt generates its first still in
+the image model. The *motion* prompt is what the video model gets once that
+still is loaded — Runway documents that in image-to-video the prompt should
+describe motion and almost nothing else, because the image already carries
+subject, colour, lighting and style. Re-describing them fights the image.
 
 ### Shot 1 — The reach (5s)
 
-> First-person point of view. A young man stands a few steps ahead on a sunlit
-> pastel street, looks directly into the lens, breaks into a grin and extends
-> his open hand toward the camera in invitation. The camera holds at chest
-> height with a gentle handheld sway and drifts a half step forward.
+**Frame:** A young man stands a few steps ahead on a sunlit city street, facing
+the viewer, beginning to raise his open hand toward the camera, grinning. Shot
+from chest height. *+ style string*
+
+**Motion:** `The man extends his open hand toward the camera. The camera sways gently and drifts a half step forward.`
 
 ### Shot 2 — The turn and run (5s)
 
-> First-person point of view. The man takes the camera's hand, spins on his
-> heel and runs, glancing back over his shoulder and laughing. The camera
-> follows close behind at running pace. Pastel buildings streak past on both
-> sides. Far ahead in the centre of frame, a small cream vintage television
-> grows steadily larger.
+**Frame:** The same young man on the same street, turning away from the viewer
+mid-stride, glancing back over his shoulder, laughing. An old television set
+sits small in the distance at the centre of the street. *+ style string*
+
+**Motion:** `The man turns and runs away from the camera, glancing back over his shoulder. The camera follows close behind at running pace. The buildings streak past on both sides.`
 
 ### Shot 3 — The leap (5s)
 
-> First-person point of view. The man plants a foot and launches into the air
-> toward a large cream vintage television, arms stretched forward. The camera
-> launches with him. The screen swells to fill the frame and its surface
-> ripples like liquid as they pass through it. Heavy motion blur, radiating
-> speed lines, whip-fast forward camera.
+**Frame:** The same man mid-launch, body stretched forward, arms out, filling
+the lower frame. A large old television set directly ahead, its screen catching
+the light. *+ style string*
+
+**Motion:** `The man leaps forward toward the television. The camera rushes after him and passes through the screen, which ripples like liquid. Radiating speed lines and bold motion smears.`
 
 ### Shot 4 — The vortex (10s)
 
-> First-person flight down a swirling tunnel of light. Ribbons of colour spiral
-> past the camera. Rows of floating rectangular screens drift by on the left
-> and right, glowing softly, their surfaces blank. The colour drains from warm
-> and saturated toward cold grey and near black as the tunnel deepens. A pale
-> point of cold light sits far ahead and grows steadily. Fast continuous
-> forward camera.
+**Frame:** Looking down a swirling tunnel of saturated colour. Rows of floating
+rectangular screens line both walls, glowing softly, their surfaces blank. A
+pale point of cold light far ahead. *+ style string*
+
+**Motion:** `The camera flies forward down the tunnel. Ribbons of colour spiral past. The screens drift by on both sides. The colour drains toward cold grey and near black and the pale light ahead grows.`
 
 The blank screens are deliberate. They are **compositing slots** — see below.
 
 ### Shot 5 — Arrival (5s)
 
-> First-person point of view. A pale point of cold light swells until it fills
-> the frame and blows out to white. The white settles into a quiet dark room
-> where a single vintage television glows cold grey against a far wall, its
-> small amber power light the only warmth in frame, dust drifting through the
-> beam. The camera eases to a stop. Slow deceleration and a gentle settle.
+**Frame:** A quiet dark room, a single old television against a far wall glowing
+cold grey, a small amber power light beneath it, dust drifting through the beam.
+*+ style string*
+
+**Motion:** `A pale light swells until it fills the frame and blows out to white, then settles on the television in the dark room. The camera slows to a stop.`
+
+## The Runway workflow, step by step
+
+**0. Verify six things first.** They are listed near the end of this file. All
+six are five minutes in the app and one of them — the policy on depicting an
+identifiable real person — can stop the whole production after you have already
+spent on look dev.
+
+**1. Save him as a Reference.** In the *image* model, upload 1–3 photos of him
+and save them as a named Reference. One clean front-facing shot and one
+three-quarter angle beats five casual snaps. Shot 2 has him glancing back over
+his shoulder, and References pattern-matches in 2D rather than reconstructing a
+head — without a three-quarter reference, that shot returns a different person.
+
+**2. Look dev.** Still in the image model, generate the look frame above,
+`@`-mentioning the Reference so it is him. Reroll until the style is right.
+Stills are cheap; this is where you spend your patience rather than your credits.
+
+**3. Five shot stills.** One per shot, again in the image model, using the
+Reference for him and the approved look frame for the style. Shots 4 and 5 have
+no character, so they take the style reference only. Approve all five before you
+generate a single second of video.
+
+**4. Motion.** Load each still into image-to-video as the first frame and give
+it that shot's **motion** prompt only. Block everything out on **Gen-4 Turbo**
+at 5 credits/sec; once framing and motion are locked, run the keeper on
+**Gen-4.5** at 12. Same money, roughly 2.4× the attempts.
+
+**5. Chain.** Take the last frame of each approved clip and use it as the first
+frame of the next. That forward chaining is what makes five clips read as one
+take. Do not plan on an end-frame keyframe — see below.
+
+**6. Post.** Composite the wordmark plate onto the television, drop your real
+YouTube clips and a Discord capture into the blank screens in shot 4, grade the
+five clips to match, add grain, and cut the film at the whiteout in shot 5.
+
+**7. Web.** Send me the file. I will cut the loop, compress it, and wire it up.
 
 ## Two things Runway will get wrong
 
@@ -235,3 +285,14 @@ Ship it three ways:
    asks for reduced motion.
 3. **Everywhere else:** the full cut is the YouTube channel trailer and the
    Discord invite video, where 25 seconds is an asset rather than a toll.
+
+## Fallback style: stylised 3D
+
+If 2D cel boils too badly to use, this is the same film in the register these
+models handle most reliably. Swap the style string, regenerate the look frame,
+keep every shot and beat identical.
+
+> Cinematic stylised 3D animation, modern animated feature quality. Rounded
+> appealing character design, soft global illumination, warm rim light,
+> volumetric light shafts, shallow depth of field, rich saturated colour,
+> subtle film grain, filmic colour grade.
