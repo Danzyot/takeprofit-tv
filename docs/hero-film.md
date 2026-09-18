@@ -28,38 +28,68 @@ whiteout. There is nothing to line up and no landing shot to match.
 
 Two tools, three steps.
 
-1. **ChatGPT** — six stills, all 16:9.
+1. **ChatGPT** — six photoreal stills, all 16:9.
 2. **Runway** — image-to-video on each still.
 3. **Runway** — assemble the six clips, export.
 
 No compositing, no tracking, no grade, no grain, no external editor.
 
-**Discord and YouTube are painted into the vortex still, not composited.** They
-are specified as shapes — a purple panel with rounded message bubbles, red play
-buttons on video rectangles — because lettering garbles in every model and at
-vortex speed nobody reads text anyway. The "animation" is simply the camera
-turning past them inside clip 6.
+**Discord and YouTube are built into the vortex still, not composited.** They
+are specified as glowing shapes — purple chat panels on the right wall, video
+screens with red play buttons on the left — because lettering garbles in every
+model and at vortex speed nobody reads text anyway. The "animation" is simply
+the camera turning past them inside clip 6.
 
 Everything must be **16:9**. Mixing ratios means black bars or a crop that chops
 his head, and it only shows up after the clips are paid for.
 
-## The look: flat cartoon animation
+## The look: photorealistic
 
-**Bold clean outlines, simplified shapes, flat colour fills, no shading, no
-gradients, no highlights.** Simplified the way an animated character is —
-hair as clean shapes rather than strands, simple hands — while his face stays
-recognisably his.
+Photoreal, shot as if on a cinema camera. This is the easiest thing to hand a
+video model, because it *is* the training data — you get texture, depth of
+field, motion blur and contact shadows for free, and those are exactly what
+flat art could not supply.
 
-Simplify is not exaggerate. Cartooning reduces detail to shapes; caricature
-stretches features toward an archetype and loses the person.
+Earlier passes tried flat 2D cartoon and it boiled. The reason is worth keeping
+written down: video models predict where pixels go next frame, and flat colour
+contains no features to track, bold outlines advertise every error at
+two-pixel width, and crisp cartoon edges have no motion blur to hide behind.
+Photoreal has all three.
 
-Flat colour is also the kindest thing to hand a video model: no gradients to
-band, no highlights to shimmer, no soft shading to boil.
+**The void becomes a studio cyclorama.** A pure white field with a photoreal
+person reads as a bad cutout, and gives the camera nothing to measure its own
+movement against. The photoreal equivalent of the same idea is a **white studio
+infinity background with soft gradient falloff and a soft contact shadow** —
+still nowhere, still surreal, but with the depth cues the model needs.
 
-**The white-on-white problem.** His t-shirt is white and so is the void. With no
-shading the shirt disappears and leaves a floating head, arms and trousers. Every
-still specifies a very light grey fill on the shirt, with the bold outline doing
-the rest.
+**The character sheet is retired.** Go back to the real photographs of him.
+Photoreal likeness is far easier than stylised likeness, because there is no
+restyling step — the model only has to place a real person in a pose.
+
+### Always state the camera
+
+Two things models get wrong unless told, and both cost takes:
+
+- **Camera height.** Without it you get the training-data average, which for
+  "looking back over the shoulder" is a slightly elevated three-quarter angle.
+  Say `The camera is at his eye level` and `35mm lens` — the lens note reads as
+  human eye height and stops the model reaching for a dramatic wide.
+- **Composition.** Models centre their subject unless told otherwise, and
+  describing the *empty* space works better than describing where the subject
+  goes: "he is on the left third of the frame, the right half is empty white
+  space."
+
+**The reference photograph carries its own camera angle.** A photo shot from
+above returns frames shot from above, however the prompt is worded. Feed it
+references taken at eye level.
+
+### Consider filming half of it
+
+Now that it is photoreal, shots 4 and 5 are a pair of hands reaching toward a
+television, and shots 1 and 2 are a man in front of a white wall. That is a
+phone, a white bedsheet and twenty minutes. Real footage beats generated
+footage every time and costs nothing, which leaves Runway only the two shots
+that cannot be filmed: the dive through the glass and the vortex.
 
 ## The six clips
 
