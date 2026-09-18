@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { CopyCode } from "@/components/copy-code";
+import { LowerThird } from "@/components/lower-third";
 import { FIRMS, LINKS, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ export const metadata: Metadata = {
 
 const SECTIONS: { title: string; body: React.ReactNode }[] = [
   {
-    title: "1. Who we are",
+    title: "Who we are",
     body: (
       <>
         {SITE.name}{" "}
@@ -25,7 +26,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    title: `2. How we make money — code ${SITE.code}`,
+    title: `How we make money — code ${SITE.code}`,
     body: (
       <>
         <p>
@@ -58,7 +59,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    title: "3. Nothing here is financial advice",
+    title: "Nothing here is financial advice",
     body: (
       <>
         Nothing on this website, in our Discord, in our videos or on any of our
@@ -70,7 +71,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    title: "4. Risk warning",
+    title: "Risk warning",
     body: (
       <>
         Trading futures and other leveraged products carries a substantial risk
@@ -84,7 +85,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    title: "5. Partner prop firms",
+    title: "Partner prop firms",
     body: (
       <>
         <p>
@@ -109,7 +110,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    title: "6. Community conduct",
+    title: "Community conduct",
     body: (
       <>
         Our Discord has its own rules, enforced by the team. Scamming,
@@ -121,7 +122,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    title: "7. Liability",
+    title: "Liability",
     body: (
       <>
         This site and our content are provided &quot;as is&quot;, without
@@ -134,7 +135,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    title: "8. Changes to this page",
+    title: "Changes to this page",
     body: (
       <>
         We may update these disclosures at any time; the version on this page is
@@ -143,7 +144,7 @@ const SECTIONS: { title: string; body: React.ReactNode }[] = [
           href={LINKS.discord}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-accent hover:underline"
+          className="text-amber hover:underline"
         >
           Discord
         </a>
@@ -158,41 +159,36 @@ export default function DisclosuresPage() {
     <>
       <SiteHeader />
 
-      <main className="flex-1 px-4 py-16">
+      <main className="flex-1 px-5 py-16">
         <div className="mx-auto max-w-3xl">
-          <h1 className="heading-gradient font-display text-4xl font-extrabold tracking-tight">
-            Disclosures
-          </h1>
-          <p className="mt-3 text-sm text-muted">
-            How {SITE.name} makes money, what code {SITE.code} does, and the
-            risks involved. Plain English, no small print.
-          </p>
+          <LowerThird
+            channel="CH 04"
+            kicker="The small print, in plain English"
+            title="Disclosures"
+          />
 
-          <div className="mt-5 flex flex-wrap items-center gap-3 rounded-xl border border-accent/25 bg-surface px-5 py-4">
-            <p className="text-sm text-muted">
+          <div className="mt-8 flex flex-wrap items-center gap-4 border border-[var(--rule)] bg-ink-2 px-5 py-4">
+            <p className="text-xs leading-relaxed text-dim">
               Code {SITE.code} pays us a commission — at no extra cost to you.
             </p>
             <CopyCode className="ml-auto" />
           </div>
 
-          <div className="mt-10 space-y-6">
+          <div className="mt-10 divide-y divide-[var(--rule)] border-y border-[var(--rule)]">
             {SECTIONS.map((section) => (
-              <section
-                key={section.title}
-                className="rounded-2xl border border-border-subtle bg-surface p-6 sm:p-7"
-              >
-                <h2 className="font-display text-lg font-bold">
+              <section key={section.title} className="py-7">
+                <h2 className="font-display text-xl font-black uppercase tracking-wide">
                   {section.title}
                 </h2>
-                <div className="mt-3 text-sm leading-relaxed text-foreground/80">
+                <div className="mt-3 text-sm leading-relaxed text-bone/80">
                   {section.body}
                 </div>
               </section>
             ))}
           </div>
 
-          <p className="mt-10 text-center text-xs text-muted">
-            Last updated: September 2026
+          <p className="mt-10 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-dim">
+            Last updated September 2026
           </p>
         </div>
       </main>

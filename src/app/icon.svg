@@ -1,8 +1,8 @@
 <!-- Browser tab icon. The screen frame disappears at 16px, so the favicon
      drops it and keeps only the breakout arrow, drawn heavier. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <rect width="64" height="64" rx="15" fill="#07080a"/>
-  <g stroke="#00d68f" stroke-width="6">
+  <rect width="64" height="64" rx="15" fill="#0b0b0d"/>
+  <g stroke="#ff9e2c" stroke-width="6">
     <path d="M13 44l12-12 8 6 14-16"/>
     <path d="M37 22h10v10"/>
   </g>

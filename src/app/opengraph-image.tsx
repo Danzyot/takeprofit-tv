@@ -13,8 +13,8 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = `${SITE.name} — futures trading community`;
 
-const ACCENT = "#00d68f";
-const ACCENT_BRIGHT = "#5cf0bb";
+const ACCENT = "#ff9e2c";
+const ACCENT_BRIGHT = "#f2f0ea";
 
 export default function Image() {
   return new ImageResponse(
@@ -26,7 +26,7 @@ export default function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: "#07080a",
+          background: "#0b0b0d",
           borderTop: `10px solid ${ACCENT}`,
           padding: "72px 80px",
           color: "#f4f6f8",
@@ -55,7 +55,7 @@ export default function Image() {
                 display: "flex",
                 marginLeft: 16,
                 background: ACCENT,
-                color: "#07080a",
+                color: "#0b0b0d",
                 borderRadius: 14,
                 padding: "0 18px",
               }}
@@ -75,7 +75,7 @@ export default function Image() {
             style={{
               display: "flex",
               background: ACCENT,
-              color: "#07080a",
+              color: "#0b0b0d",
               fontSize: 40,
               fontWeight: 700,
               borderRadius: 14,

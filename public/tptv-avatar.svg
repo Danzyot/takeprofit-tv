@@ -1,13 +1,13 @@
 <!-- Square TPTV icon for Discord / YouTube avatars. Export to PNG at 512px. -->
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <rect width="256" height="256" rx="56" fill="#07080a"/>
+  <rect width="256" height="256" rx="56" fill="#0b0b0d"/>
   <g transform="translate(32 32) scale(3)">
-    <g stroke="#00d68f" stroke-width="3">
+    <g stroke="#ff9e2c" stroke-width="3">
       <rect x="4" y="9" width="56" height="40" rx="11"/>
       <path d="M32 49v7"/>
       <path d="M22 56h20"/>
     </g>
-    <g stroke="#5cf0bb" stroke-width="3.2">
+    <g stroke="#f2f0ea" stroke-width="3.2">
       <path d="M16 38l9-9 7 5 13-14"/>
       <path d="M37 20h8v8"/>
     </g>

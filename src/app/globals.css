@@ -1,182 +1,379 @@
 @import "tailwindcss";
 
 /* ============================================================
-   Takeprofit TV — design tokens
+   TAKEPROFIT TV — broadcast design system
 
-   Dark only, on purpose: the site is small enough that a theme
-   toggle would be more machinery than the two pages deserve.
+   The brand is a channel, so the UI is borrowed from television
+   rather than from landing pages: a channel bug, running timecode,
+   lower thirds, a ticker, test-card colour.
+
+   Texture is deliberately restrained. Grain sits on the page at low
+   opacity; scanlines live ONLY inside screen frames, never over body
+   copy, because they cost contrast. Glitch is rare and brief.
    ============================================================ */
 
 :root {
-  --background: #07080a;
-  --surface: #0e1014;
-  --surface-2: #14171d;
-  --border: #23262e;
-  --foreground: #f4f6f8;
-  --muted: #98a1ae;
-  /* Mint green — "take profit". Dark text sits on it at high contrast. */
-  --accent: #00d68f;
-  --accent-bright: #5cf0bb;
-  /* Broadcast red. Used only for the on-air dot and YouTube. */
-  --live: #ff3d57;
-  --discord: #5865f2;
+  --ink: #0b0b0d;
+  --ink-2: #131317;
+  --ink-3: #1a1a20;
+  --bone: #f2f0ea;
+  --dim: #8e8b84;
+  --rule: rgba(242, 240, 234, 0.14);
+  --amber: #ff9e2c;
+  --rec: #ff3b30;
+  --blurple: #5865f2;
+
+  /* SMPTE colour bars at 75% — the site's decorative palette.
+     Seven colours where every competitor has one accent. */
+  --bar-1: #c0c0c0;
+  --bar-2: #c0c000;
+  --bar-3: #00c0c0;
+  --bar-4: #00c000;
+  --bar-5: #c000c0;
+  --bar-6: #c00000;
+  --bar-7: #0000c0;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-2: var(--surface-2);
-  --color-border-subtle: var(--border);
-  --color-foreground: var(--foreground);
-  --color-muted: var(--muted);
-  --color-accent: var(--accent);
-  --color-accent-bright: var(--accent-bright);
-  --color-live: var(--live);
-  --color-discord: var(--discord);
-  --font-sans: var(--font-inter);
-  --font-display: var(--font-sora);
-  --font-mono: var(--font-mono);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-bone: var(--bone);
+  --color-dim: var(--dim);
+  --color-amber: var(--amber);
+  --color-rec: var(--rec);
+  --color-blurple: var(--blurple);
+  --font-display: var(--font-shoulders);
+  --font-mono: var(--font-space-mono);
 }
 
 html,
 body {
-  /* Glows and off-canvas panels must never create sideways scroll. */
   overflow-x: clip;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  background: var(--ink);
+  color: var(--bone);
+  font-family: var(--font-space-mono), ui-monospace, monospace;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Skip the focus ring for mouse users, keep it for keyboards. */
+::selection {
+  background: var(--amber);
+  color: var(--ink);
+}
+
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--amber);
   outline-offset: 3px;
-  border-radius: 4px;
 }
 
-/* ---------- Hero backdrop ---------- */
+/* ---------- texture ---------- */
 
-/* Faint terminal grid, faded out toward the bottom so it never
-   competes with the copy sitting on top of it. */
-.grid-bg {
-  background-image:
-    linear-gradient(rgba(0, 214, 143, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 214, 143, 0.055) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(ellipse at 50% 0%, black 25%, transparent 75%);
+/* Film grain over the whole page. fractalNoise sums signed octaves,
+   which gives even photographic grain; `turbulence` would give
+   veined clouds instead. Kept under 0.07 so text stays crisp. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 70;
+  pointer-events: none;
+  opacity: 0.055;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 760ms steps(4) infinite;
 }
-
-/* Headline that fades from plain text into the accent. */
-.heading-gradient {
-  background-image: linear-gradient(
-    102deg,
-    var(--foreground) 32%,
-    var(--accent-bright) 88%
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* ---------- Motion ---------- */
-
-/* Scroll reveal, driven by the <Reveal> component. */
-.reveal {
-  opacity: 0;
-  transform: translateY(20px);
-  transition:
-    opacity 0.65s ease,
-    transform 0.65s ease;
-}
-.reveal.revealed {
-  opacity: 1;
-  transform: none;
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-3%, 2%); }
+  50% { transform: translate(2%, -3%); }
+  75% { transform: translate(-2%, -2%); }
+  100% { transform: translate(3%, 3%); }
 }
 
-/* The on-air dot in the header. */
-@keyframes live-pulse {
-  0%,
-  100% {
-    opacity: 1;
-    box-shadow: 0 0 0 0 rgba(255, 61, 87, 0.55);
-  }
-  70% {
-    opacity: 0.75;
-    box-shadow: 0 0 0 6px rgba(255, 61, 87, 0);
-  }
-}
-.live-dot {
-  animation: live-pulse 2.2s ease-out infinite;
-}
-
-/* Slow drift on the hero glow so the page isn't perfectly static. */
-@keyframes float-slow {
-  0%,
-  100% {
-    transform: translate(-50%, 0);
-  }
-  50% {
-    transform: translate(-50%, -18px);
-  }
-}
-.float-slow {
-  animation: float-slow 9s ease-in-out infinite;
-}
-
-/* Light sweeping across a button on hover. */
-.btn-shine {
-  position: relative;
-  overflow: hidden;
-  transition:
-    transform 0.22s ease,
-    box-shadow 0.22s ease,
-    background-color 0.22s ease;
-}
-.btn-shine:hover {
-  transform: translateY(-2px);
-}
-.btn-shine::after {
+/* Scanlines + phosphor stripe. Two layers: the 2px horizontal raster
+   everyone does, and the 3px vertical RGB triad that actually sells it
+   as a tube. Only ever applied to a screen frame. */
+.scanlines::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: -150%;
-  height: 100%;
-  width: 55%;
-  background: linear-gradient(
-    105deg,
-    transparent,
-    rgba(255, 255, 255, 0.35),
-    transparent
-  );
-  transform: skewX(-20deg);
+  inset: 0;
+  z-index: 5;
   pointer-events: none;
+  background:
+    linear-gradient(rgba(11, 11, 13, 0) 50%, rgba(0, 0, 0, 0.22) 50%),
+    linear-gradient(90deg, rgba(255, 0, 0, 0.05), rgba(0, 255, 0, 0.018), rgba(0, 0, 255, 0.05));
+  background-size: 100% 2px, 3px 100%;
 }
-.btn-shine:hover::after {
-  animation: btn-shine-sweep 0.75s ease;
+
+/* Curved-glass sheen for a screen frame. */
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 6;
+  pointer-events: none;
+  background: linear-gradient(118deg, rgba(255, 255, 255, 0.09) 0 20%, transparent 44%);
 }
-@keyframes btn-shine-sweep {
-  to {
-    left: 160%;
+
+/* ---------- broadcast type ---------- */
+
+/* Mistuned-signal fringe. Fires for a moment every 14s rather than
+   looping, so it reads as a signal fault and not as a CSS animation. */
+.rgb-split {
+  animation: rgb-split 14s infinite;
+}
+@keyframes rgb-split {
+  0%, 97.6%, 100% {
+    text-shadow: 1px 0 rgba(255, 60, 60, 0.32), -1px 0 rgba(60, 220, 255, 0.32);
+    transform: none;
   }
+  98% {
+    text-shadow: 6px 0 rgba(255, 60, 60, 0.8), -6px 0 rgba(60, 220, 255, 0.8);
+    transform: translateX(-3px) skewX(0.5deg);
+  }
+  98.8% {
+    text-shadow: -5px 0 rgba(255, 60, 60, 0.7), 5px 0 rgba(60, 220, 255, 0.7);
+    transform: translateX(4px);
+  }
+}
+
+/* ---------- ticker ---------- */
+
+/* The track holds the content twice; at -50% the copy sits exactly
+   where the original started, so the loop has no visible seam. */
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 42s linear infinite;
+  will-change: transform;
+}
+@keyframes ticker {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+/* ---------- lower third ---------- */
+
+/* Section headings arrive the way a broadcast caption does: a wipe
+   from the left, not a fade from below. */
+.lower-third {
+  animation: wipe-in 0.62s cubic-bezier(0.22, 0.9, 0.24, 1) both;
+}
+@keyframes wipe-in {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+@supports (animation-timeline: view()) {
+  .lower-third {
+    animation-timeline: view();
+    animation-range: entry 10% entry 62%;
+  }
+}
+
+/* Screen content comes up the way a tube warms up: a horizontal line
+   that opens vertically. Also scroll-driven where supported. */
+.tube-on {
+  animation: tube-on 0.72s cubic-bezier(0.2, 0.85, 0.28, 1) both;
+}
+@keyframes tube-on {
+  0% { transform: scaleY(0.006); opacity: 0.4; }
+  55% { transform: scaleY(0.006); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 1; }
+}
+@supports (animation-timeline: view()) {
+  .tube-on {
+    animation-timeline: view();
+    animation-range: entry 6% entry 55%;
+  }
+}
+
+/* ---------- indicators ---------- */
+
+.rec-dot {
+  animation: rec-blink 1.4s steps(2, end) infinite;
+}
+@keyframes rec-blink {
+  50% { opacity: 0.2; }
+}
+
+/* ---------- reduced motion + the user's own kill switch ----------
+   Rapid flicker is a photosensitivity issue, not a taste question, so
+   the OS setting and the on-page toggle both stop everything. */
+@media (prefers-reduced-motion: reduce) {
+  .grain::after,
+  .rgb-split,
+  .ticker-track,
+  .rec-dot {
+    animation: none;
+  }
+  .lower-third,
+  .tube-on {
+    animation: none;
+    clip-path: none;
+    transform: none;
+    opacity: 1;
+  }
+}
+
+[data-fx="off"] .grain::after,
+[data-fx="off"] .rgb-split,
+[data-fx="off"] .rec-dot {
+  animation: none;
+}
+[data-fx="off"] .rgb-split {
+  text-shadow: none;
+}
+[data-fx="off"] .scanlines::before,
+[data-fx="off"] .glass::after {
+  display: none;
+}
+[data-fx="off"] .ticker-track {
+  animation-play-state: paused;
+}
+
+/* ============================================================
+   The hero room — flat layers in real perspective
+   ============================================================ */
+
+.room-stage {
+  position: relative;
+  height: clamp(420px, 66vh, 620px);
+  perspective: 1100px;
+  perspective-origin: 50% 46%;
+  overflow: hidden;
+}
+.room-world {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.room-layer {
+  position: absolute;
+  inset: -14%;
+  transform-style: preserve-3d;
+}
+
+/* Far wall, lit only by what the set throws at it. */
+.room-wall {
+  transform: translateZ(-620px) scale(1.75);
+  background:
+    radial-gradient(ellipse 50% 42% at 50% 46%, rgba(255, 158, 44, 0.14), transparent 62%),
+    radial-gradient(ellipse 80% 62% at 50% 54%, rgba(38, 34, 44, 0.5), transparent 72%),
+    linear-gradient(#0e0e12, var(--ink) 72%);
+}
+/* Panelling, not a tech grid — it marks depth, it isn't decoration. */
+.room-wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  background-image: linear-gradient(rgba(242, 240, 234, 0.1) 1px, transparent 1px);
+  background-size: 100% 86px;
+  mask-image: radial-gradient(ellipse 58% 48% at 50% 48%, #000 10%, transparent 72%);
+}
+
+.room-dust {
+  transform: translateZ(-240px) scale(1.25);
+}
+.room-dust i {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: rgba(240, 228, 208, 0.8);
+  animation-name: drift;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes drift {
+  from { transform: translate(0, 14vh); opacity: 0; }
+  12% { opacity: 0.9; }
+  88% { opacity: 0.9; }
+  to { transform: translate(26px, -16vh); opacity: 0; }
+}
+
+/* The set itself. */
+.room-set {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(560px, 82vw);
+  aspect-ratio: 4 / 3;
+  transform: translate(-50%, -54%) translateZ(60px);
+  transform-style: preserve-3d;
+}
+.room-body {
+  position: absolute;
+  inset: 0;
+  border-radius: 30px / 26px;
+  background: linear-gradient(#24262f, #14151c 56%, #0c0d12);
+  box-shadow:
+    0 60px 120px -34px rgba(0, 0, 0, 0.95),
+    inset 0 2px 0 rgba(255, 255, 255, 0.06);
+}
+/* Asymmetric radius is what reads as curved tube glass. */
+.room-screen {
+  position: absolute;
+  inset: 6% 6% 16%;
+  border-radius: 44px / 32px;
+  overflow: hidden;
+  background: #06070b;
+  box-shadow:
+    inset 0 0 72px rgba(0, 0, 0, 0.95),
+    0 0 90px rgba(255, 158, 44, 0.16),
+    0 0 200px rgba(255, 158, 44, 0.08);
+}
+.room-feet {
+  position: absolute;
+  bottom: 4.5%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.room-feet b {
+  width: 74px;
+  height: 5px;
+  border-radius: 3px;
+  background: #2d3039;
+}
+.room-knob {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #3b3f4d;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+.room-led {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 12px var(--amber);
+}
+
+/* Out-of-focus foreground. Cheap, and it sells the depth more than
+   anything else in the scene. */
+.room-fore {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -8%;
+  height: 32%;
+  transform: translateZ(300px);
+  background: linear-gradient(to top, var(--ink) 34%, rgba(11, 11, 13, 0.7) 68%, transparent);
+  filter: blur(7px);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .live-dot,
-  .float-slow {
-    animation: none;
-  }
-  .btn-shine:hover {
-    transform: none;
-  }
-  .btn-shine:hover::after {
-    animation: none;
-  }
+  .room-world { transform: none !important; }
+  .room-dust { display: none; }
 }
+[data-fx="off"] .room-dust { display: none; }
+[data-fx="off"] .room-screen { box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8); }
