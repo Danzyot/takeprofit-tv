@@ -183,6 +183,16 @@ What makes it sit inside the plate rather than on top of it:
 - **The walls wash out from 3.25s** as the light takes the frame.
 - **The walls are pushed out to ±940px** so the tunnel's core, and the figure
   falling through it, stay clear.
+- **Every card is lit by the tunnel**: a rim glow in the wall's colour, a wash of
+  that colour across its face, and a motion blur that grows with how fast the
+  card is going past. Nothing in the plate is sharp — it is all speed and bloom —
+  so a crisp rectangle is the loudest "pasted on" tell there is.
+
+The one thing left that reads as clutter is not the composite. The plate has
+Runway's own **fake** Discord and YouTube panels baked into both walls, so there
+are two sets of UI in the shot competing: garbled ones underneath, real ones on
+top. That is why beat C's prompt asks for panels of light and no interfaces —
+with a clean tunnel the real content is the only content in frame.
 
 The Discord side runs the giveaway live: the counter climbs to 1,500, the timer
 runs down, and the embed flips to the winners at 2.00s — while the card is at its
