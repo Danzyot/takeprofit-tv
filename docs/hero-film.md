@@ -54,52 +54,80 @@ Paste into every shot, unchanged. Consistency comes from repeating it verbatim.
 
 ## Look development comes first
 
-Before any video, generate **one still** that settles the look, then reference it
-everywhere. Reroll this single frame until it is right — it is the cheapest
-decision in the production and every shot inherits from it.
+Look dev is **two passes**, and doing it in one is the mistake that costs you a
+day. Generating a full styled scene asks the model for a new pose, a new outfit,
+a new background, a new camera angle *and* the man's face at the same time.
+Identity is the first thing it drops, and you get a handsome cartoon stranger.
 
-> The man in the reference image, redrawn as a single frame from a western
-> adult animated series. He stands on a sunlit city street, caught mid-stride,
-> looking back over his shoulder with a grin. Keep his face recognisable — same
-> jaw, same hairline, same brow. Clean confident 2D linework of even weight, cel
-> shading in few bold tonal steps, heavy black shadow shapes across his jaw and
-> jacket, saturated comic-book colour, softly painted background buildings
-> behind crisp character art, warm rim light along his shoulder, subtle film
-> grain.
+**Lock the head, then move him.**
 
-**Name the reference in the prompt.** Runway now hosts third-party image models
-alongside Gen-4, and only Gen-4 has the saved-Reference `@mention` mechanic —
-the others take attached images as plain conditioning. A prompt that says "a
-young man" gives any of them licence to invent a face. "The man in the reference
-image" does not. Note the phrasing is positive throughout: "keep his face
-recognisable", never "do not change his face", because negative phrasing is
-documented as producing the opposite.
+### Pass 1 — the portrait
 
-**Which image model.** Default to **Nano Banana Pro** (the Gemini 3 Pro Image
-entry, not the base Nano Banana). The hard problem at this stage is holding a
-real person's face through a total restyle into 2D, and Gemini-family image
-models are the strongest of Runway's roster at that. Flux and Seedream give
-prettier illustration but are looser with a specific face; GPT Image has
-excellent prompt adherence and weaker likeness.
+Change only the rendering. Same head angle, same framing, same expression as the
+photograph. This is an easy ask, so it actually holds a likeness.
 
-Fall back to **Gen-4** if likeness keeps drifting — its saved Reference is built
-for reusing one character across many generations, which is the other half of
-this job. Whichever wins, **stay on it for all five stills**; switching models
-midway is how five shots stop looking like one film.
+> Redraw the man in the reference photograph as a character from a western adult
+> animated series, keeping the same head angle, framing and expression as the
+> photograph. He has [his actual features, described concretely — hair volume and
+> texture, brow weight, face shape, nose, lips, stubble, anything he always
+> wears]. Push it toward caricature by exaggerating his own distinctive
+> features. Clean confident 2D linework of even weight, cel shading in few bold
+> tonal steps, heavy black shadow shapes, saturated comic-book colour, plain
+> flat background.
 
-This choice covers the stills only. The video stage is unchanged: draft on
-Gen-4 Turbo, commit on Gen-4.5.
+Three things make this work, and all three were missing from the first attempt:
 
-Set the aspect ratio to 16:9 — the whole film is 16:9 and you do not want to
-crop his head back in later.
+- **Describe his features, do not just ask to preserve them.** "Same jaw, same
+  brow" is an instruction with no content — the model cannot know whether his
+  brow is heavy or fine, so it falls back to the handsome-protagonist average.
+  Name the actual features.
+- **Identity first, style second, and keep the style short.** A prompt that is
+  400 characters of style and 8 words of face will give you perfect style and an
+  invented face. It weights what you weight.
+- **Ask for caricature.** Exaggerating a person's own distinctive features
+  preserves identity; idealising them destroys it. "Handsome" is the average the
+  model reaches for when nothing specific is there to push on.
 
-### Do not leave this step until the frame passes all four
+**References: head shots only.** One sharp front-facing photo with a neutral
+closed-mouth expression and good light, one three-quarter. No full-body shots
+and no props — an attached photo of an object becomes a subject the model feels
+obliged to include, and it will turn up in every frame. A soft video still of
+him mid-sentence is a much weaker reference than it looks.
+
+Run this pass at 1:1. You only want the head.
+
+### Pass 2 — the look frame
+
+Once the portrait is unmistakably him, use **that** as the reference and put him
+in the world: the sunlit street, mid-stride, looking back over his shoulder with
+a grin. Switch to 16:9 here. This frame is the style bible every shot inherits
+from.
+
+### Do not leave look dev until the frame passes all four
 
 - It looks like **him** at a glance, not a man with similar hair.
 - Linework is **clean and even in weight** — nothing scratchy or inconsistent.
 - Shadows are **bold flat shapes**, not soft gradients. That is the tell of this
   style; gradients drift it toward generic 3D.
 - The background is **softer than he is** — painted, not detailed.
+
+### Which image model
+
+Default to **Nano Banana Pro** (the Gemini 3 Pro Image entry, not the base Nano
+Banana). The hard problem here is holding a real face through a total restyle
+into 2D, and Gemini-family image models are the strongest of Runway's roster at
+that. Flux and Seedream give prettier illustration but are looser with a
+specific face; GPT Image has excellent prompt adherence and weaker likeness.
+
+Fall back to **Gen-4** if likeness keeps drifting through pass 1 — its saved
+Reference is built for reusing one character across many generations. If it
+still will not hold, that is the signal to look at **Act-Two**, which drives an
+animated character from real footage of him rather than redrawing him from a
+photo.
+
+Whichever wins, **stay on it for every still**; switching models midway is how
+five shots stop looking like one film. This choice covers stills only — the
+video stage is still Gen-4 Turbo for drafts and Gen-4.5 for keepers.
 
 ## The shots
 
@@ -161,17 +189,18 @@ six are five minutes in the app and one of them — the policy on depicting an
 identifiable real person — can stop the whole production after you have already
 spent on look dev.
 
-**1. Save him as a Reference.** In the *image* model, upload photos of him and
-save them as a named Reference. Two specific angles matter far more than five
-casual snaps: **one clean front-facing head shot and one three-quarter or
-profile head shot.** Body and action shots contribute almost nothing here —
-what the model needs is face data from more than one direction. Shot 2 has him glancing back over
-his shoulder, and References pattern-matches in 2D rather than reconstructing a
-head — without a three-quarter reference, that shot returns a different person.
+**1. Gather two reference photos.** **One sharp front-facing head shot with a
+neutral closed-mouth expression, one three-quarter.** Head shots only — no
+full-body, no props. An attached photo of an object becomes a subject the model
+feels obliged to draw, and it will appear in every frame. Shot 2 glances back
+over his shoulder, and image models pattern-match in 2D rather than
+reconstructing a head, so without the second angle that shot returns a stranger.
 
-**2. Look dev.** Still in the image model, generate the look frame above,
-`@`-mentioning the Reference so it is him. Reroll until the style is right.
-Stills are cheap; this is where you spend your patience rather than your credits.
+**2. Look dev, in two passes.** Pass 1 converts the portrait and nothing else,
+until it is unmistakably him. Pass 2 puts that approved head into the world.
+Do not compress these into one generation — asking for a new pose, outfit,
+background, camera angle and his face together is how you get a handsome
+stranger. Stills are cheap; spend patience here rather than credits.
 
 **3. Five shot stills.** One per shot, again in the image model, using the
 Reference for him and the approved look frame for the style. Shots 4 and 5 have
