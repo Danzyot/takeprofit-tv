@@ -22,6 +22,8 @@
   --amber: #ff9e2c;
   --rec: #ff3b30;
   --blurple: #5865f2;
+  /* Cold phosphor. The hero screen and everything it lights. */
+  --screen: #c9ccd1;
 
   /* SMPTE colour bars at 75% — the site's decorative palette.
      Seven colours where every competitor has one accent. */
@@ -43,6 +45,7 @@
   --color-amber: var(--amber);
   --color-rec: var(--rec);
   --color-blurple: var(--blurple);
+  --color-screen: var(--screen);
   --font-display: var(--font-shoulders);
   --font-mono: var(--font-space-mono);
 }
@@ -262,7 +265,7 @@ body {
 .room-wall {
   transform: translateZ(-620px) scale(1.75);
   background:
-    radial-gradient(ellipse 50% 42% at 50% 46%, rgba(255, 158, 44, 0.14), transparent 62%),
+    radial-gradient(ellipse 50% 42% at 50% 46%, rgba(201, 204, 209, 0.16), transparent 62%),
     radial-gradient(ellipse 80% 62% at 50% 54%, rgba(38, 34, 44, 0.5), transparent 72%),
     linear-gradient(#0e0e12, var(--ink) 72%);
 }
@@ -325,8 +328,8 @@ body {
   background: #06070b;
   box-shadow:
     inset 0 0 72px rgba(0, 0, 0, 0.95),
-    0 0 90px rgba(255, 158, 44, 0.16),
-    0 0 200px rgba(255, 158, 44, 0.08);
+    0 0 90px rgba(201, 209, 218, 0.14),
+    0 0 200px rgba(201, 209, 218, 0.07);
 }
 .room-feet {
   position: absolute;
@@ -377,3 +380,30 @@ body {
 }
 [data-fx="off"] .room-dust { display: none; }
 [data-fx="off"] .room-screen { box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.8); }
+
+/* Tube flicker.
+
+   The opacity steps are hand-jittered on purpose. A smooth sine reads as a
+   CSS animation; an irregular table reads as a tube that is not quite
+   holding its signal. Kept shallow so the copy stays legible. */
+.crt-flicker {
+  animation: crt-flicker 3.4s steps(1, end) infinite;
+}
+@keyframes crt-flicker {
+  0%, 100% { opacity: 1; }
+  3% { opacity: 0.86; }
+  5% { opacity: 1; }
+  22% { opacity: 0.93; }
+  24% { opacity: 1; }
+  47% { opacity: 0.88; }
+  48% { opacity: 0.97; }
+  50% { opacity: 1; }
+  71% { opacity: 0.91; }
+  73% { opacity: 1; }
+  92% { opacity: 0.84; }
+  94% { opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .crt-flicker { animation: none; }
+}
+[data-fx="off"] .crt-flicker { animation: none; }

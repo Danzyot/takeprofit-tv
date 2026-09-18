@@ -10,20 +10,53 @@ and cut them together.
 
 ## The arc
 
-The film has a colour journey, and it is doing real work: it starts as bright
-candy-pastel cartoon and **cools into the site's amber-on-near-black as the
-vortex deepens**, so the last frame can dissolve straight into the live hero
-without a jarring palette jump. Do not skip this — it is what makes the
-transition land rather than look like two unrelated videos taped together.
+The film has a colour journey, and it is doing real work: it starts warm and
+saturated, and **drains to cold grey and near-black as the vortex deepens**, so
+it arrives in the same world the website lives in. Do not skip this — it is what
+makes the ending land rather than look like two unrelated videos taped together.
+
+Match the destination exactly: the site's hero is a **cold grey** screen in a
+dark room, lit by nothing but the tube, with a single amber power LED as the
+only warm point in frame. That LED is the one piece of warmth that survives the
+journey, which is a nice beat to land on.
+
+## Look development comes first
+
+Before any video, generate **one still** that settles the look, then reference it
+in every shot. Everything else in this brief depends on that frame existing.
+
+The style is **stylised 3D with cinematic lighting** — the register of a modern
+animated feature. Colourful and characterful, but lit and graded like film.
+
+That is a deliberate move away from flat vector cartoon, for two reasons. Flat
+2D with hard outlines reads as clipart at video resolution, and it is the thing
+video models handle worst: linework boils, outlines wobble frame to frame, and
+flat fills band under compression. Volumetric light, soft shading and depth of
+field are what these models are genuinely good at, so a stylised-3D target gets
+you a better *and* more consistent result from the same credits.
+
+Generate the style frame in an image model (Gen-4 Image, or one of the image
+models hosted inside Runway), then save it as a Reference:
+
+> A warm stylised 3D animated still in the register of a modern animated
+> feature. A young man stands on a sunlit street of rounded pastel buildings,
+> caught mid-stride, looking back over his shoulder with a grin. Soft global
+> illumination, warm rim light along his shoulder, volumetric light shafts,
+> shallow depth of field, rich saturated colour, gentle film grain, filmic
+> colour grade.
+
+Reroll that one frame until the look is right. It is the cheapest decision in
+the whole production and every shot inherits from it.
 
 ## Global style string
 
-Paste this, unchanged, into every shot. Consistency across shots comes from
-repeating the style verbatim, not from rewording it.
+Once the look frame is approved, paste this into every shot, unchanged.
+Consistency comes from repeating it verbatim, not rewording it each time.
 
-> Flat 2D cartoon animation, bold black outlines of even weight, flat cel
-> shading, candy-pastel palette of peach, mint, coral and cream with warm amber
-> light, rounded friendly shapes, subtle paper grain.
+> Cinematic stylised 3D animation, modern animated feature quality. Rounded
+> appealing character design, soft global illumination, warm rim light,
+> volumetric light shafts, shallow depth of field, rich saturated colour,
+> subtle film grain, filmic colour grade.
 
 ## The shots
 
@@ -57,28 +90,31 @@ four takes of each.
 
 > First-person flight down a swirling tunnel of light. Ribbons of colour spiral
 > past the camera. Rows of floating rectangular screens drift by on the left
-> and right, glowing softly, their surfaces blank. The colours cool from candy
-> pastel toward deep amber and near black as the tunnel deepens. A bright point
-> of warm amber light sits far ahead and grows steadily. Fast continuous
+> and right, glowing softly, their surfaces blank. The colour drains from warm
+> and saturated toward cold grey and near black as the tunnel deepens. A pale
+> point of cold light sits far ahead and grows steadily. Fast continuous
 > forward camera.
 
 The blank screens are deliberate. They are **compositing slots** — see below.
 
 ### Shot 5 — Arrival (5s)
 
-> First-person point of view. A point of warm amber light swells until it fills
+> First-person point of view. A pale point of cold light swells until it fills
 > the frame and blows out to white. The white settles into a quiet dark room
-> where a single vintage television glows amber against a far wall, dust
-> drifting through the beam. The camera eases to a stop. Slow deceleration and
-> a gentle settle.
+> where a single vintage television glows cold grey against a far wall, its
+> small amber power light the only warmth in frame, dust drifting through the
+> beam. The camera eases to a stop. Slow deceleration and a gentle settle.
 
 ## Two things Runway will get wrong
 
 **1. Text.** Video models garble lettering. Never ask it to render
 "TakeprofitTV" — it will come back as TAKEPRQFIT, warping frame to frame.
-`docs/assets` has a clean cartoon television with the correct wordmark and the
-TPTV mark on screen. Use it as the reference image for the set, and composite
-the nameplate back on in post if a shot needs it legible.
+
+`docs/assets/tptv-tv-cartoon.png` is a flat vector drawing of the set with the
+wordmark and the TPTV mark correct. **It is a lettering plate, not a style
+reference** — flat vector is not the look this film is going for. Use it only to
+composite the nameplate back onto the television in post, and take the set's
+actual look from the style frame above.
 
 **2. The YouTube clips and the Discord feed.** Runway cannot insert real
 footage. That is why Shot 4 asks for *blank* glowing rectangles: they are

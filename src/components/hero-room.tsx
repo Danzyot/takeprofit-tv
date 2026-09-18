@@ -104,7 +104,7 @@ export function HeroRoom() {
                   aria-hidden="true"
                 />
               ) : (
-                <div className="flex h-full flex-col justify-between p-5 sm:p-7">
+                <div className="crt-flicker flex h-full flex-col justify-between p-5 sm:p-7 text-screen">
                   <div className="flex justify-between text-[9px] uppercase tracking-[0.2em] text-dim sm:text-[10px]">
                     <span>CH 01 · The Discord</span>
                     <span className="hidden sm:inline">Open 24/7</span>
@@ -112,7 +112,7 @@ export function HeroRoom() {
                   <h1 className="rgb-split font-display text-[13vw] font-black uppercase leading-[0.82] tracking-[-0.015em] sm:text-[62px]">
                     Take
                     <br />
-                    Profit <span className="bg-bone px-1 text-ink">TV</span>
+                    Profit <span className="bg-screen px-1 text-ink">TV</span>
                   </h1>
                   <p className="max-w-[34ch] text-[10px] leading-relaxed text-dim sm:text-xs">
                     A futures community that runs like a channel.
