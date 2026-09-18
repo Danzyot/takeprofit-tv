@@ -407,3 +407,151 @@ body {
   .crt-flicker { animation: none; }
 }
 [data-fx="off"] .crt-flicker { animation: none; }
+
+/* ---------- the boot sequence ----------
+   The whole viewport is the television: a bezel drawn inside the window
+   edge, the corners pulled dark, and static filling what is left. It runs
+   once per tab, and never for a visitor who has asked for reduced motion —
+   a full-screen flicker is a photosensitivity issue, not a taste question.
+
+   The site underneath is hidden by an attribute set before first paint,
+   so nothing flashes behind the static and nothing has to hydrate twice. */
+
+:root[data-boot="1"] .site-shell {
+  visibility: hidden;
+}
+:root[data-boot="1"] .boot {
+  display: block;
+}
+:root[data-booted="1"] .site-shell {
+  animation: boot-reveal 420ms cubic-bezier(0.2, 0.8, 0.3, 1) both;
+}
+@keyframes boot-reveal {
+  from { opacity: 0; transform: scale(1.012); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* The overlay is always in the DOM and hidden by CSS, so React never has to
+   read the DOM to decide whether to render it. */
+.boot {
+  --bezel: 22px;
+  --glass: 30px;
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  overflow: hidden;
+  background: #07070a;
+  /* the tube itself: bezel, then the glass, then the corners falling away */
+  /* the cabinet: a moulded outer shell, a bright edge catching the room
+     light, then the black surround the glass sits in */
+  background:
+    linear-gradient(170deg, #26262c 0%, #17171c 38%, #0d0d10 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.10),
+    inset 0 0 0 var(--bezel) #0a0a0d,
+    inset 0 0 26px 14px rgba(0, 0, 0, 0.85);
+}
+.boot canvas {
+  position: absolute;
+  inset: var(--bezel);
+  width: calc(100% - var(--bezel) * 2);
+  height: calc(100% - var(--bezel) * 2);
+  border-radius: var(--glass);
+  /* the buffer is tiny and stretched, so keep the pixels hard */
+  image-rendering: pixelated;
+}
+
+/* the curvature — a highlight across the top of the glass and dark corners */
+.boot-glass {
+  position: absolute;
+  inset: var(--bezel);
+  border-radius: var(--glass);
+  pointer-events: none;
+  /* curvature: a sheen across the top of the tube, the corners falling away,
+     and a hard inner lip where the glass meets the cabinet */
+  background:
+    radial-gradient(120% 80% at 50% -14%, rgba(255, 255, 255, 0.14), transparent 52%),
+    radial-gradient(118% 112% at 50% 50%, transparent 38%, rgba(0, 0, 0, 0.55) 78%, rgba(0, 0, 0, 0.92) 100%);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+    inset 0 0 40px 10px rgba(0, 0, 0, 0.55);
+}
+
+/* two-layer scanlines, the same pair the hero screen uses */
+.boot-lines {
+  position: absolute;
+  inset: var(--bezel);
+  border-radius: var(--glass);
+  pointer-events: none;
+  opacity: 0.5;
+  background:
+    repeating-linear-gradient(to bottom, rgba(0,0,0,0.42) 0 1px, transparent 1px 2px),
+    repeating-linear-gradient(to right, rgba(255,0,0,0.05) 0 1px, rgba(0,255,0,0.05) 1px 2px, rgba(0,0,255,0.05) 2px 3px);
+}
+
+/* the hum bar rolling up the picture */
+.boot-roll {
+  position: absolute;
+  left: var(--bezel);
+  right: var(--bezel);
+  height: 22%;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.10) 45%, rgba(255,255,255,0.03) 60%, transparent);
+  animation: boot-roll 1.15s linear infinite;
+}
+@keyframes boot-roll {
+  from { transform: translateY(-140%); }
+  to   { transform: translateY(560%); }
+}
+
+.boot-word {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  padding: 0 24px;
+}
+.boot[data-phase="word"] .boot-word,
+.boot[data-phase="out"] .boot-word {
+  opacity: 1;
+  animation: boot-lock 340ms steps(1, end) both;
+}
+/* it does not fade in, it catches — three misfires and then it holds */
+@keyframes boot-lock {
+  0%   { opacity: 0; transform: translateY(-9px) scaleY(1.5); }
+  18%  { opacity: 1; transform: translateY(5px) scaleY(0.8); }
+  34%  { opacity: 0; transform: none; }
+  52%  { opacity: 1; transform: translateY(-2px); }
+  68%  { opacity: 0.4; transform: none; }
+  100% { opacity: 1; transform: none; }
+}
+
+/* the picture collapsing to nothing, the way a tube switches off */
+.boot[data-phase="out"] {
+  animation: boot-off 380ms cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+@keyframes boot-off {
+  0%   { opacity: 1; clip-path: inset(0 0 0 0); }
+  62%  { opacity: 1; clip-path: inset(48% 0 48% 0); }
+  100% { opacity: 0; clip-path: inset(50% 0 50% 0); }
+}
+
+/* the standby lamp, bottom right of the bezel */
+@media (min-width: 900px) {
+  .boot { --bezel: 34px; --glass: 40px; }
+}
+
+.boot-led {
+  position: absolute;
+  right: calc(var(--bezel) / 2);
+  bottom: calc(var(--bezel) / 2 - 3px);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 12px 3px rgba(255, 158, 44, 0.55);
+}

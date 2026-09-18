@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 import { CopyCode } from "@/components/copy-code";
 import { LowerThird } from "@/components/lower-third";
 import { FIRMS, LINKS, SITE } from "@/lib/site";
@@ -192,6 +193,7 @@ export default function DisclosuresPage() {
           </p>
         </div>
       </main>
+      <SiteFooter />
     </>
   );
 }

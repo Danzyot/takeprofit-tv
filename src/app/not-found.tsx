@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
+import { SiteFooter } from "@/components/site-footer";
 import { LINKS } from "@/lib/site";
 
 /* SMPTE bars at 75%, then the pluge strip underneath — the card a
@@ -59,6 +60,7 @@ export default function NotFound() {
           </div>
         </div>
       </main>
+      <SiteFooter />
     </>
   );
 }

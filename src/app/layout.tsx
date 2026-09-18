@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Big_Shoulders, Space_Mono } from "next/font/google";
-import { SiteFooter } from "@/components/site-footer";
+import { BootSequence } from "@/components/boot-sequence";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -47,17 +47,25 @@ export default function RootLayout({
       className={`${shoulders.variable} ${spaceMono.variable} h-full`}
     >
       <head>
-        {/* Restore the visitor's effects preference before first paint,
-            so someone who turned the texture off never sees it flash. */}
+        {/* Two decisions that have to be made before first paint.
+            The effects preference, so someone who turned the texture off
+            never sees it flash. And whether the channel tunes in: once per
+            tab, never for a visitor who has asked for reduced motion, and
+            with a timeout that gives the page back if the script that
+            clears it never runs. */}
         <script
           dangerouslySetInnerHTML={{
-            __html: `try{if(localStorage.getItem("tptv-fx")==="off")document.documentElement.dataset.fx="off"}catch(e){}`,
+            __html:
+              `try{if(localStorage.getItem("tptv-fx")==="off")document.documentElement.dataset.fx="off"}catch(e){}` +
+              `try{var m=matchMedia("(prefers-reduced-motion: reduce)").matches,b=sessionStorage.getItem("tptv-booted");` +
+              `if(!m&&!b){document.documentElement.dataset.boot="1";` +
+              `setTimeout(function(){delete document.documentElement.dataset.boot},6000)}}catch(e){}`,
           }}
         />
       </head>
-      <body className="grain flex min-h-full flex-col">
-        {children}
-        <SiteFooter />
+      <body className="grain">
+        <div className="site-shell flex min-h-full flex-col">{children}</div>
+        <BootSequence />
       </body>
     </html>
   );
