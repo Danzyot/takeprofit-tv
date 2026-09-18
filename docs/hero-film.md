@@ -41,41 +41,54 @@ nobody could read text anyway.
 
 ## The stills — ChatGPT, 16:9
 
-Attach the character sheet to stills 1–3. Negative phrasing is fine here; the
-warning against it applies to Runway's motion prompts, not to image models.
+**Attach the character sheet to all four**, including the vortex, where it acts
+as a style reference only.
+
+**Do not describe the style in words beyond matching the reference.** The sheet
+is smooth soft shading with clean linework and natural colour — not cel shading,
+and not flat comic colour. Earlier prompts specified a rendering that fought the
+sheet and the results looked worse for it. "Drawn in exactly the same rendering
+style as the reference image" is a stronger instruction than any adjective list,
+because the reference cannot drift and a description can.
+
+Negative phrasing is fine here; the warning against it applies to Runway's
+motion prompts, not to image models.
 
 **1 — The turn**
 
-> The character in the reference image, same style, same face and outfit. He
-> stands a few steps ahead with his back to the viewer, turning his head back
-> over his left shoulder to look at the camera, his left arm reaching back
-> toward the camera with the hand open. Pure white empty background — no floor,
-> no horizon, no shadows, nothing but white. Clean even 2D linework, simple cel
-> shading in a few flat tones.
+> The character in the reference image, drawn in exactly the same rendering
+> style — smooth soft shading, clean linework, natural colour, same face and
+> outfit. He is close to the camera, seen from behind from roughly the waist up,
+> turning his head back over his left shoulder to look at the viewer, his left
+> arm reaching back toward the camera with the hand open and near the lens. Pure
+> white empty background — no floor, no horizon, no shadows, nothing but white.
 
 **2 — The run**
 
-> The character in the reference image, same style, same face and outfit, seen
-> from behind, running away from the camera into empty white space. Far ahead of
-> him, an old boxy black CRT television floats at the centre of the frame, its
-> curved glass screen showing grey no-signal static. Pure white empty background
-> — no floor, no horizon, no shadows.
+> The character in the reference image, drawn in exactly the same rendering
+> style — smooth soft shading, clean linework, natural colour, same face and
+> outfit. Seen from behind, running away from the camera into empty white space.
+> Far ahead of him an old boxy black CRT television floats at the centre of the
+> frame, its curved glass screen showing grey no-signal static. Pure white empty
+> background — no floor, no horizon, no shadows.
 
 **3 — The dive**
 
-> The character in the reference image, same style, same face and outfit, seen
-> from behind, diving head first with both arms stretched forward toward a large
-> old boxy black CRT television directly ahead. The television's curved glass
-> screen fills much of the frame, showing grey no-signal static. Pure white
-> empty background — no floor, no shadows.
+> The character in the reference image, drawn in exactly the same rendering
+> style — smooth soft shading, clean linework, natural colour, same face and
+> outfit. Seen from behind, diving head first with both arms stretched forward
+> toward a large old boxy black CRT television directly ahead. The television's
+> curved glass screen fills much of the frame, showing grey no-signal static.
+> Pure white empty background — no floor, no shadows.
 
 **4 — The vortex**
 
-> Looking down the inside of a swirling tunnel of light and colour. On the right
-> wall, a floating glowing blurple-purple chat panel with rounded message
-> bubbles. On the left wall, floating video rectangles with red play buttons.
-> Bright white light at the far end of the tunnel. Clean even 2D linework,
-> simple cel shading in a few flat tones.
+> Looking down the inside of a swirling tunnel of light and colour, drawn in the
+> same rendering style as the reference image — smooth soft shading, clean
+> linework, natural colour. On the right wall a floating glowing blurple-purple
+> chat panel with rounded message bubbles. On the left wall floating video
+> rectangles with red play buttons. Bright white light at the far end of the
+> tunnel.
 
 ## The motion prompts — Runway, image-to-video
 
@@ -136,10 +149,11 @@ a generated image — each generation drifts a little further from him.
 
 ### The riskiest clip
 
-Clip 1 asks for a hand reaching toward camera, and hands are the thing these
-models are worst at. It is easier here than it would be head-on, because he is
-turned away and the hand comes back over his shoulder rather than filling the
-frame — but still budget extra takes for it specifically.
+Clip 1 asks for an open hand near the lens, and hands are the thing these models
+are worst at — the closer the hand, the harder it gets. Budget extra takes for
+this one specifically, and if the hand keeps coming back mangled, pull him back
+from the camera until it holds. A clean hand a step further away beats a
+close-up of a claw.
 
 Faces and fingers also hold for roughly the first two seconds of a generation
 and drift after. **Keep every clip with him in it to 5 seconds.** The 10 seconds
