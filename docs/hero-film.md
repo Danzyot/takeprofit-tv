@@ -67,34 +67,55 @@ Change only the rendering. Same head angle, same framing, same expression as the
 photograph. This is an easy ask, so it actually holds a likeness.
 
 > Redraw the man in the reference photograph as a character from a western adult
-> animated series, keeping the same head angle, framing and expression as the
-> photograph. He has [his actual features, described concretely — hair volume and
-> texture, brow weight, face shape, nose, lips, stubble, anything he always
-> wears]. Push it toward caricature by exaggerating his own distinctive
-> features. Clean confident 2D linework of even weight, cel shading in few bold
-> tonal steps, heavy black shadow shapes, saturated comic-book colour, plain
-> flat background.
+> animated series. This is a portrait study and the goal is an accurate likeness
+> — keep his exact head angle, facial proportions and expression from the
+> photograph. [Two or three neutral, factual notes on his hair, brow and
+> expression.] Clean confident 2D linework of even weight, cel shading in few
+> bold tonal steps, heavy black shadow shapes, saturated comic-book colour,
+> plain flat background.
 
-Three things make this work, and all three were missing from the first attempt:
+**Ask for accuracy, never caricature.** An earlier version of this brief said to
+push toward caricature by exaggerating his distinctive features. That is wrong
+and it fails in a specific way: the model does not exaggerate *him*, it
+exaggerates toward an archetype, and you get a brooding handsome stranger.
+Caricature works when a human artist knows which features carry a likeness. A
+model just cranks every adjective it was handed.
 
-- **Describe his features, do not just ask to preserve them.** "Same jaw, same
-  brow" is an instruction with no content — the model cannot know whether his
-  brow is heavy or fine, so it falls back to the handsome-protagonist average.
-  Name the actual features.
-- **Identity first, style second, and keep the style short.** A prompt that is
-  400 characters of style and 8 words of face will give you perfect style and an
-  invented face. It weights what you weight.
-- **Ask for caricature.** Exaggerating a person's own distinctive features
-  preserves identity; idealising them destroys it. "Handsome" is the average the
-  model reaches for when nothing specific is there to push on.
+**Keep feature notes short and neutral.** Stacked intensifiers are the other
+half of the same failure — "very thick eyebrows sitting low over his eyes" plus
+"full lips" returns angry brows and a pout, because each feature is maxed
+independently. "His eyebrows are dark and level" does the job without the
+model reading it as a direction to perform.
 
-**References: head shots only.** One sharp front-facing photo with a neutral
-closed-mouth expression and good light, one three-quarter. No full-body shots
-and no props — an attached photo of an object becomes a subject the model feels
-obliged to include, and it will turn up in every frame. A soft video still of
-him mid-sentence is a much weaker reference than it looks.
+**References: head shots only, and they must be good.** One sharp front-facing
+photo with a neutral closed-mouth expression, one three-quarter, one profile.
+Shot at eye level in soft daylight — a phone by a window is fine. No full-body
+shots and no props: an attached photo of an object becomes a subject the model
+feels obliged to include, and it will turn up in every frame.
+
+This is the biggest lever in the whole production and the one most likely to be
+skipped. A soft video still, shot from above, mid-sentence, under flat overhead
+light is not a reference — the model reconstructs the missing information from
+its own defaults, which is exactly what a generic face is. No prompt recovers
+from a bad input.
 
 Run this pass at 1:1. You only want the head.
+
+### When to stop prompting
+
+If good photographs plus the prompt above do not produce a recognisable likeness
+within **two or three attempts, stop tweaking words.** Past that point prompt
+iteration is diminishing returns and it spends credits for nothing. Two real
+alternatives:
+
+- **Act-Two** drives an animated character from actual footage of him
+  performing, instead of reconstructing his face from a photograph. It is the
+  tool built for animating a specific person, and this film is first-person POV
+  of him throughout — this may be the primary path rather than the fallback.
+- **Commission the character design.** One turnaround sheet from an
+  illustrator settles the likeness permanently, and every still and shot
+  references that instead of re-fighting it each generation. For the centrepiece
+  film of a brand that is a normal production cost.
 
 ### Pass 2 — the look frame
 
