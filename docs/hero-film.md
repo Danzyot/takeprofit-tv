@@ -128,6 +128,43 @@ What chaining costs you:
 - The look, wardrobe and lighting ride on the start frame. Keep the prompt to
   motion only.
 
+### The clean tunnel
+
+The vortex is the one beat worth regenerating on its own, and not for its joins —
+legs → vortex reads fine as a punch through the glass. It is worth it because the
+plate has Runway's own **fake** Discord and YouTube panels baked into both walls,
+so the real content composited on top has garbled interfaces fighting it
+underneath. A clean tunnel makes the real content the only content in frame.
+
+It does not chain off anything, so it can be generated first and in isolation.
+
+**The still**, from an image model:
+
+```
+First-person POV photograph from inside a tunnel of light. Both of the
+subject's arms reach forward into frame from the bottom corners, forearms in a
+white long-sleeve top, hands open and spread, close to camera and in sharp
+focus. Ahead, a corridor of streaming light rushes toward a white-hot core at
+the centre of frame. Along the left wall, plain glowing rectangular panels in
+warm red; along the right wall, plain glowing rectangular panels in cool
+purple-blue. The panels are blank sheets of coloured light — no text, no logos,
+no icons, no interface of any kind. Long motion-blurred streaks radiate from
+the centre. A small distant figure in a white shirt falls away ahead into the
+light. Photoreal, cinematic, wide lens, heavy bloom, 16:9.
+```
+
+**The motion**, Gen-4.5, 5s, 16:9:
+
+```
+The camera flies forward down the tunnel. The glowing panels rush past along
+both walls and out of frame. The white light ahead grows until it fills the
+whole frame.
+```
+
+One direction, one move. The earlier version asked for a right turn then a left
+turn in the same prompt and Gen-4 blurred them together — the turns are not
+needed anyway, because the walls are on both sides at once.
+
 ### The three beats
 
 Draft on **Gen-4 Turbo** at 5 credits/sec. Re-run a keeper on **Gen-4.5** at 12
