@@ -179,55 +179,87 @@ video stage is still Gen-4 Turbo for drafts and Gen-4.5 for keepers.
 ## The shots
 
 Each is a single continuous action with one camera move. Generate at least four
-takes of each.
+takes of each video shot.
 
-Every shot has **two prompts**. The *frame* prompt generates its first still in
-the image model. The *motion* prompt is what the video model gets once that
-still is loaded — Runway documents that in image-to-video the prompt should
-describe motion and almost nothing else, because the image already carries
-subject, colour, lighting and style. Re-describing them fights the image.
+Every shot has **two prompts, used in two different tools**:
+
+| | Tool | Produces |
+|---|---|---|
+| **Frame** prompt | the image model | the still |
+| **Motion** prompt | Runway, image-to-video | the clip |
+
+The motion prompt describes motion and almost nothing else, because the still
+already carries subject, colour, lighting and style — Runway documents that
+re-describing them fights the image.
+
+**Attach the character sheet to every frame prompt** that has him in it, and
+say "the character in the reference image, same style, same face and outfit".
+The sheet locks wardrobe and build as well as face, which is why a full-body
+turnaround beats a portrait. Shots 4 and 5 have no character.
+
+Approve all five stills before generating a single second of video.
 
 ### Shot 1 — The reach (5s)
 
-**Frame:** A young man stands a few steps ahead on a sunlit city street, facing
-the viewer, beginning to raise his open hand toward the camera, grinning. Shot
-from chest height. *+ style string*
+**Frame:** The character in the reference image, drawn in exactly the same
+animated style with the same face, hair, white t-shirt, silver chain, black
+trousers and white sneakers. He stands a few steps away on a sunlit city street,
+facing the viewer at eye level, beginning to raise his open hand toward the
+camera, relaxed and smiling. Full body in frame. Clean even 2D linework, simple
+cel shading in a few flat tones, softly painted background buildings behind him.
+16:9.
 
 **Motion:** `The man extends his open hand toward the camera. The camera sways gently and drifts a half step forward.`
 
 ### Shot 2 — The turn and run (5s)
 
-**Frame:** The same young man on the same street, turning away from the viewer
-mid-stride, glancing back over his shoulder, laughing. An old television set
-sits small in the distance at the centre of the street. *+ style string*
+**Frame:** The character in the reference image, same style, same face and
+outfit. He is turning away from the viewer mid-stride on the same sunlit city
+street, glancing back over his shoulder toward the camera and laughing, one arm
+reaching back. An old television set sits small in the distance at the end of
+the street. Clean even 2D linework, simple cel shading, softly painted
+background. 16:9.
 
 **Motion:** `The man turns and runs away from the camera, glancing back over his shoulder. The camera follows close behind at running pace. The buildings streak past on both sides.`
 
 ### Shot 3 — The leap (5s)
 
-**Frame:** The same man mid-launch, body stretched forward, arms out, filling
-the lower frame. A large old television set directly ahead, its screen catching
-the light. *+ style string*
+**Frame:** The character in the reference image, same style, same face and
+outfit. He is mid-leap seen from behind and slightly below, body stretched
+forward, arms out, launching toward a large old television set directly ahead
+whose screen glows. Clean even 2D linework, simple cel shading, softly painted
+background. 16:9.
 
 **Motion:** `The man leaps forward toward the television. The camera rushes after him and passes through the screen, which ripples like liquid. Radiating speed lines and bold motion smears.`
 
 ### Shot 4 — The vortex (10s)
 
-**Frame:** Looking down a swirling tunnel of saturated colour. Rows of floating
-rectangular screens line both walls, glowing softly, their surfaces blank. A
-pale point of cold light far ahead. *+ style string*
+**Frame:** A tunnel of swirling saturated colour seen from inside, looking
+straight down its length. Rows of floating rectangular screens line both walls,
+glowing softly, their surfaces blank and featureless. A pale point of cold light
+far ahead at the centre. Same animated style: clean even 2D linework, simple cel
+shading in a few flat tones. 16:9.
 
 **Motion:** `The camera flies forward down the tunnel. Ribbons of colour spiral past. The screens drift by on both sides. The colour drains toward cold grey and near black and the pale light ahead grows.`
 
-The blank screens are deliberate. They are **compositing slots** — see below.
-
 ### Shot 5 — Arrival (5s)
 
-**Frame:** A quiet dark room, a single old television against a far wall glowing
-cold grey, a small amber power light beneath it, dust drifting through the beam.
-*+ style string*
+**Frame:** A quiet dark room. A single old television set against the far wall,
+its screen glowing cold grey, a small amber power light beneath it. Dust
+drifting through the beam from the screen. Same animated style: clean even 2D
+linework, simple cel shading in a few flat tones, deep shadows. 16:9.
 
 **Motion:** `A pale light swells until it fills the frame and blows out to white, then settles on the television in the dark room. The camera slows to a stop.`
+
+### Two things not to fight for
+
+**Leave the television blank in shots 3 and 5.** Do not ask for "TAKEPROFIT TV"
+on the screen — image and video models both garble lettering, and you will burn
+takes chasing a clean logo. The wordmark is composited in post from
+`docs/assets/tptv-tv-cartoon.png`.
+
+**Keep the screens in shot 4 blank.** That is the design, not a failure. They
+are tracked slots for real YouTube clips and a Discord capture.
 
 ## The Runway workflow, step by step
 
