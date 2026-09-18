@@ -63,43 +63,69 @@ Identity is the first thing it drops, and you get a handsome cartoon stranger.
 
 ### Pass 1 — the portrait
 
-Change only the rendering. Same head angle, same framing, same expression as the
-photograph. This is an easy ask, so it actually holds a likeness.
+Change only the rendering. The photograph supplies the face; the prompt supplies
+nothing but how it is drawn.
 
-> Redraw the man in the reference photograph as a character from a western adult
-> animated series. This is a portrait study and the goal is an accurate likeness
-> — keep his exact head angle, facial proportions and expression from the
-> photograph. [Two or three neutral, factual notes on his hair, brow and
-> expression.] Clean confident 2D linework of even weight, cel shading in few
-> bold tonal steps, heavy black shadow shapes, saturated comic-book colour,
-> plain flat background.
+> Rotoscope this photograph into a western adult animated style. Trace his
+> actual face and keep every proportion exactly as photographed — the width and
+> length of his face, the spacing and shape of his eyes, the shape of his nose,
+> mouth and jaw, and his real hairline. Render with clean even 2D linework and
+> simple cel shading in a few flat tones, natural skin and hair colour, soft
+> shading rather than heavy black shadow shapes. The drawing sits directly on
+> the photograph's geometry.
 
-**Ask for accuracy, never caricature.** An earlier version of this brief said to
-push toward caricature by exaggerating his distinctive features. That is wrong
-and it fails in a specific way: the model does not exaggerate *him*, it
-exaggerates toward an archetype, and you get a brooding handsome stranger.
-Caricature works when a human artist knows which features carry a likeness. A
-model just cranks every adjective it was handed.
+**Rotoscope is the operative word.** It names the actual technique — keep the
+real geometry, lay animation rendering over it — and it tells the model to
+follow the photograph instead of redrawing from its own idea of a face.
 
-**Keep feature notes short and neutral.** Stacked intensifiers are the other
-half of the same failure — "very thick eyebrows sitting low over his eyes" plus
-"full lips" returns angry brows and a pout, because each feature is maxed
-independently. "His eyebrows are dark and level" does the job without the
-model reading it as a direction to perform.
+**Strip the style terms that deform faces.** "Heavy black shadow shapes" and
+"saturated comic-book colour" are the two that force a face into the style's
+geometry rather than the subject's. Leave them out of this pass entirely. This
+is not a compromise on the look: faces in this style are fairly naturalistic,
+with clean lines and restrained shading, and the heavy shadow shapes are used
+sparingly for dramatic beats. Dialling them down here is closer to the
+reference, not further from it.
+
+**No feature list, and never caricature.** An earlier version of this brief
+asked for exaggerated distinctive features and a list of them. Both fail the
+same way: a model does not exaggerate the person, it exaggerates toward an
+archetype, and stacked intensifiers — "very thick eyebrows sitting low over his
+eyes" plus "full lips" — return angry brows and a pout, each feature maxed
+independently of the face it belongs to. If a note is genuinely needed, make it
+short, factual and free of intensifiers.
 
 **References: head shots only, and they must be good.** One sharp front-facing
-photo with a neutral closed-mouth expression, one three-quarter, one profile.
-Shot at eye level in soft daylight — a phone by a window is fine. No full-body
+photo with a neutral closed-mouth expression, one three-quarter, one profile,
+shot at eye level in soft daylight — a phone by a window is fine. No full-body
 shots and no props: an attached photo of an object becomes a subject the model
 feels obliged to include, and it will turn up in every frame.
 
-This is the biggest lever in the whole production and the one most likely to be
+This is the biggest lever in the production and the one most likely to be
 skipped. A soft video still, shot from above, mid-sentence, under flat overhead
 light is not a reference — the model reconstructs the missing information from
-its own defaults, which is exactly what a generic face is. No prompt recovers
-from a bad input.
+its own defaults, and a generic face is exactly what those defaults are. No
+prompt recovers from a bad input.
 
 Run this pass at 1:1. You only want the head.
+
+### Pass 1b — add the style back, carefully
+
+Only once the portrait genuinely looks like him, push the style on that image:
+
+> Keep this character's exact face and proportions unchanged. Strengthen the
+> shading into bolder flat shapes and deepen the colour saturation.
+
+If this breaks the likeness, you have found the ceiling. **Stay at the lower
+stylisation level and run the whole film there.** Consistency across five shots
+is worth more than maximum style on one frame.
+
+### Stills do not have to be made in Runway
+
+The image stage and the video stage are independent — Runway needs a first
+frame and does not care what drew it. If another image tool holds the likeness
+better, use it for all five stills and bring the finished frames back for the
+video pass. Whichever tool wins, stay on it for every still; switching midway
+is how five shots stop looking like one film.
 
 ### When to stop prompting
 
@@ -134,11 +160,11 @@ from.
 
 ### Which image model
 
-Default to **Nano Banana Pro** (the Gemini 3 Pro Image entry, not the base Nano
-Banana). The hard problem here is holding a real face through a total restyle
-into 2D, and Gemini-family image models are the strongest of Runway's roster at
-that. Flux and Seedream give prettier illustration but are looser with a
-specific face; GPT Image has excellent prompt adherence and weaker likeness.
+There is no reliable ranking here — test rather than trust a recommendation,
+including this one. In practice on this project GPT Image held the likeness
+noticeably better than Nano Banana Pro, which produced the more beautiful
+illustration and the less recognisable man. Run the same prompt and the same
+photograph through two or three and judge them on one question: is that him.
 
 Fall back to **Gen-4** if likeness keeps drifting through pass 1 — its saved
 Reference is built for reusing one character across many generations. If it
