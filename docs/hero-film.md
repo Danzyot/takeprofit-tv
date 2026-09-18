@@ -86,18 +86,100 @@ tracked slots. Drop the real clips and a Discord capture into them in an editor
 (After Effects, Resolve, even CapCut with corner-pin). Generated screens
 showing invented YouTube content would look fake and say nothing.
 
+## Locking his face: a two-stage pipeline
+
+**Runway's References feature belongs to the image model, not the video model.**
+There is no "attach three photos to a video generation" path. Identity is locked
+one stage earlier:
+
+1. **Gen-4 Image + References** — attach 1–3 reference photos of him, `@`-mention
+   the saved reference in the prompt, and generate a *still* for each shot: the
+   reach, the run, the leap. This is where you fight for his likeness, and stills
+   are cheap to iterate.
+2. **Image-to-video** — feed each approved still in as the **first frame** of its
+   shot. The video model then only has to produce motion, not invent a face.
+
+References pattern-matches from 2D; it does not build 3D geometry, so a large
+angle change breaks identity. Shot 2 has him **glancing back over his shoulder** —
+supply a three-quarter reference, not just a front-facing one, or that shot will
+come back as a different person.
+
+Detail also degrades across a generation: faces and fingers hold for roughly the
+first two seconds and drift after. **Keep any shot that holds on his face to 5
+seconds.** Save 10s for the vortex, where there is no face to wreck.
+
+### Shot 1 is the expensive one
+
+A first-person shot whose subject is an outstretched hand asks the model for the
+two things it is worst at — hands, and precise hand-to-camera interaction. Budget
+several takes for it specifically, and consider framing him from the chest up
+with the hand entering frame rather than filling it.
+
+If real performance matters more than a prompted gesture, **Act-Two** is the
+right tool: it transfers a real driving performance — head, face, body, hands —
+onto a character reference, up to about 30 seconds. Check whether your plan tier
+includes it before designing around it.
+
 ## Continuity between shots
 
-Use the **last frame of each shot as the first frame of the next**. That is
-what makes five clips read as one take. For the man, attach the same reference
-images to every shot so he is the same person throughout — one clean, well-lit,
-front-facing photo plus one three-quarter angle works better than five
-casual snaps.
+Use the **last frame of each shot as the first frame of the next**. That forward
+chaining is what makes five clips read as one take.
 
-Shot 5 must end on `docs/assets/tptv-handoff-frame.png` — a 1920×1080 capture
-of the real site hero. Feed it as the end keyframe if the model accepts one,
-otherwise match it by hand in the grade. The film is finished when its last
-frame and the site's first frame are indistinguishable.
+**Do not plan on an end-frame keyframe.** Gen-3 Alpha Turbo had first-and-last
+keyframes; Gen-3 was retired in July 2026 and Gen-4 Turbo does not offer a last
+frame at all. Whether Gen-4.5 has shipped keyframes is unconfirmed — it was
+promised at announcement and the current docs still list only text-to-video and
+image-to-video. Verify in-app before building a plan that needs it.
+
+### So don't make Runway land on the website at all
+
+The original plan — make the final frame match the site hero exactly — depends
+on a feature that may not exist, and matching by hand is fussy.
+
+**End the film on the white flash instead, and have the website fade up from
+white.** Shot 5 already blows out to white before settling; simply cut the film
+at the whiteout. The site then does the second half of the transition in CSS,
+where it is free, exact and reversible. `tptv-handoff-frame.png` stops being a
+target Runway has to hit and becomes what it should have been: a grading
+reference so the film's last colours match the site's first ones.
+
+## Which model, and what it costs
+
+Credits are the real constraint, so spend them in the right order.
+
+| Model | Credits/sec | 10s clip | Use it for |
+|---|---|---|---|
+| **Gen-4 Turbo** | 5 | 50 | Blocking out framing and motion. Draft everything here. |
+| **Gen-4.5** | 12 | 120 | The final take, once a shot is locked. Current flagship. |
+
+Standard (~625 credits/month) buys roughly **five** 10-second Gen-4.5 takes — not
+a production budget once rerolls are counted. Pro (~2,250) is about eighteen.
+Drafting on Turbo and committing on Gen-4.5 stretches the same money about 2.4×.
+
+One prompting note that depends on the model: the "one action per prompt" rule is
+a **Gen-4** rule. Gen-4.5 is documented as handling sequenced instructions and
+camera choreography within a single prompt, so on 4.5 you can push more
+direction into each shot than the prompts above carry. The five-shot split still
+stands — 25 seconds is not one generation on any model.
+
+**Never use negative prompts.** Runway documents that Gen-4 interprets what
+should happen, not what to avoid, and that negative phrasing can produce the
+opposite. "No camera shake" can give you shake; write "locked camera" instead.
+Plenty of blog advice says otherwise — it contradicts Runway's own guide.
+
+## Before you spend anything
+
+Six things are worth five minutes in the app, because every Runway domain is
+blocked from this environment and none of them could be confirmed from here:
+
+1. Does Gen-4.5 accept an end-frame keyframe yet?
+2. Is Extend available on Gen-4.5, and what is the cap?
+3. Gen-4.5 native resolution — 720p or 1080p — and which aspect ratios.
+4. Does Gen-4.5 take References directly, or is References still image-stage only?
+5. Is Act-Two included on your plan tier?
+6. **Runway's current policy on depicting a real, identifiable person.** You have
+   his consent, but moderation can still block a generation, and a pipeline that
+   fails after the look-dev spend is the most expensive way to find out.
 
 ## Putting it on the site
 
@@ -112,7 +194,8 @@ Ship it three ways:
    straight into `NEXT_PUBLIC_HERO_VIDEO` — `src/components/hero-room.tsx`
    already swaps the screen's typography for a video when that is set.
 2. **Once per visitor:** the full cut as a skippable intro, gated on
-   `localStorage`, with a Skip control visible from the first second, never
-   shown to anyone whose OS asks for reduced motion.
+   `localStorage`, ending on the whiteout that the page fades up from, with a
+   Skip control visible from the first second, never shown to anyone whose OS
+   asks for reduced motion.
 3. **Everywhere else:** the full cut is the YouTube channel trailer and the
    Discord invite video, where 25 seconds is an asset rather than a toll.
