@@ -59,6 +59,6 @@ export const FIRMS: Firm[] = [
       "Payouts every 3 trading days, 90/10 split",
       "$0 activation fee",
     ],
-    url: process.env.NEXT_PUBLIC_LUCID_URL || "https://lucidtrading.com",
+    url: process.env.NEXT_PUBLIC_LUCID_URL || "https://lucidtrading.com/ref/TP",
   },
 ];
