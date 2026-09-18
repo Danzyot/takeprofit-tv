@@ -75,9 +75,23 @@ image" does not. Note the phrasing is positive throughout: "keep his face
 recognisable", never "do not change his face", because negative phrasing is
 documented as producing the opposite.
 
-Stills are the cheap stage, so run the same prompt on two models and compare
-rather than agonising over the picker. Set the aspect ratio to 16:9 — the whole
-film is 16:9 and you do not want to crop his head back in later.
+**Which image model.** Default to **Nano Banana Pro** (the Gemini 3 Pro Image
+entry, not the base Nano Banana). The hard problem at this stage is holding a
+real person's face through a total restyle into 2D, and Gemini-family image
+models are the strongest of Runway's roster at that. Flux and Seedream give
+prettier illustration but are looser with a specific face; GPT Image has
+excellent prompt adherence and weaker likeness.
+
+Fall back to **Gen-4** if likeness keeps drifting — its saved Reference is built
+for reusing one character across many generations, which is the other half of
+this job. Whichever wins, **stay on it for all five stills**; switching models
+midway is how five shots stop looking like one film.
+
+This choice covers the stills only. The video stage is unchanged: draft on
+Gen-4 Turbo, commit on Gen-4.5.
+
+Set the aspect ratio to 16:9 — the whole film is 16:9 and you do not want to
+crop his head back in later.
 
 ### Do not leave this step until the frame passes all four
 
