@@ -1,0 +1,182 @@
+@import "tailwindcss";
+
+/* ============================================================
+   Takeprofit TV — design tokens
+
+   Dark only, on purpose: the site is small enough that a theme
+   toggle would be more machinery than the two pages deserve.
+   ============================================================ */
+
+:root {
+  --background: #07080a;
+  --surface: #0e1014;
+  --surface-2: #14171d;
+  --border: #23262e;
+  --foreground: #f4f6f8;
+  --muted: #98a1ae;
+  /* Mint green — "take profit". Dark text sits on it at high contrast. */
+  --accent: #00d68f;
+  --accent-bright: #5cf0bb;
+  /* Broadcast red. Used only for the on-air dot and YouTube. */
+  --live: #ff3d57;
+  --discord: #5865f2;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border-subtle: var(--border);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-bright: var(--accent-bright);
+  --color-live: var(--live);
+  --color-discord: var(--discord);
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-sora);
+  --font-mono: var(--font-mono);
+}
+
+html,
+body {
+  /* Glows and off-canvas panels must never create sideways scroll. */
+  overflow-x: clip;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+/* Skip the focus ring for mouse users, keep it for keyboards. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---------- Hero backdrop ---------- */
+
+/* Faint terminal grid, faded out toward the bottom so it never
+   competes with the copy sitting on top of it. */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(0, 214, 143, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 214, 143, 0.055) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 25%, transparent 75%);
+}
+
+/* Headline that fades from plain text into the accent. */
+.heading-gradient {
+  background-image: linear-gradient(
+    102deg,
+    var(--foreground) 32%,
+    var(--accent-bright) 88%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Motion ---------- */
+
+/* Scroll reveal, driven by the <Reveal> component. */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition:
+    opacity 0.65s ease,
+    transform 0.65s ease;
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* The on-air dot in the header. */
+@keyframes live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 0 0 rgba(255, 61, 87, 0.55);
+  }
+  70% {
+    opacity: 0.75;
+    box-shadow: 0 0 0 6px rgba(255, 61, 87, 0);
+  }
+}
+.live-dot {
+  animation: live-pulse 2.2s ease-out infinite;
+}
+
+/* Slow drift on the hero glow so the page isn't perfectly static. */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate(-50%, 0);
+  }
+  50% {
+    transform: translate(-50%, -18px);
+  }
+}
+.float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+
+/* Light sweeping across a button on hover. */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    background-color 0.22s ease;
+}
+.btn-shine:hover {
+  transform: translateY(-2px);
+}
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -150%;
+  height: 100%;
+  width: 55%;
+  background: linear-gradient(
+    105deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: skewX(-20deg);
+  pointer-events: none;
+}
+.btn-shine:hover::after {
+  animation: btn-shine-sweep 0.75s ease;
+}
+@keyframes btn-shine-sweep {
+  to {
+    left: 160%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .live-dot,
+  .float-slow {
+    animation: none;
+  }
+  .btn-shine:hover {
+    transform: none;
+  }
+  .btn-shine:hover::after {
+    animation: none;
+  }
+}
