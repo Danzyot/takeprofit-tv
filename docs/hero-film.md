@@ -124,47 +124,41 @@ of any clip that warps; that is where generated clips are weakest.
 Then the export gets cut to a loop, compressed and wired into
 `NEXT_PUBLIC_HERO_VIDEO`, which `src/components/hero-room.tsx` already reads.
 
-## The character sheet
+## Likeness: what was learned the hard way
 
-His likeness is settled by a **full-body character turnaround** — front and
-three-quarter, same face, same wardrobe — generated in ChatGPT from photographs
-of him, then cartooned to the flat look above. That flat sheet is the
-reference attached to every still, and it locks build and clothing as well as
-the face, which a portrait would not.
+Photoreal removes most of this problem, because the model only has to place a
+real person in a pose rather than reinvent him in a style. The notes below cost
+several rounds to find and still apply to any reference-driven generation.
 
-Getting there took several wrong turns worth not repeating:
-
+- **Reference photographs decide everything.** Sharp, eye level, soft daylight,
+  neutral closed-mouth expression. One front-facing, one three-quarter. A soft
+  video still shot from above, mid-sentence, under flat overhead light is not a
+  reference — the model rebuilds the missing information from its own defaults,
+  and those defaults are a generic face.
+- **Head shots only, no props.** An attached photograph of an object becomes a
+  subject the model feels obliged to include. A golf bag in an early reference
+  turned up in every single output.
 - **Ask for accuracy, never caricature.** A model does not exaggerate the
-  person, it exaggerates toward an archetype, and you get a brooding handsome
-  stranger.
+  person, it exaggerates toward an archetype.
 - **Do not stack intensifiers.** "Very thick eyebrows sitting low over his eyes"
   plus "full lips" returns angry brows and a pout, each feature maxed
   independently of the face it belongs to.
-- **Strip the style terms that deform faces.** "Heavy black shadow shapes" and
-  "saturated comic-book colour" push a face into the style's geometry instead of
-  the subject's. Rotoscope language — trace the photograph, keep its proportions
-  — does the opposite.
-- **References must be head shots, sharp, at eye level, in soft light.** No
-  props: an attached photo of an object becomes a subject the model feels
-  obliged to draw, and it turns up in every frame.
-- **The image stage does not have to happen in Runway.** On this project GPT
-  Image held the likeness noticeably better than Runway's own image models.
-  Runway only needs a first frame; it does not care what drew it.
-
-If the sheet ever needs regenerating, go back to the photographs rather than to
-a generated image — each generation drifts a little further from him.
+- **The image stage does not have to happen in Runway.** GPT Image held the
+  likeness noticeably better than Runway's own image models here. Runway needs a
+  first frame and does not care what drew it.
 
 ### The riskiest clip
 
-Clip 1 asks for an open hand near the lens, and hands are the thing these models
-are worst at — the closer the hand, the harder it gets. Budget extra takes for
-this one specifically, and if the hand keeps coming back mangled, pull him back
-from the camera until it holds. A clean hand a step further away beats a
-close-up of a claw.
+Clip 1 puts an open hand near the lens, and hands are what these models handle
+worst. Photoreal helps — hands with skin texture and shading are far more
+common in training data than flat drawn ones — but still budget extra takes, and
+pull him back from the camera if the hand will not hold. A clean hand a step
+further away beats a close-up of a claw.
 
-Faces and fingers also hold for roughly the first two seconds of a generation
-and drift after. **Keep every clip with him in it to 5 seconds.** The 10 seconds
-goes to the vortex, where there is no face to wreck.
+Faces and fingers hold for roughly the first two seconds of a generation and
+drift after. **Keep every clip with him in it to 5 seconds and use its first
+two.** Six clips at two usable seconds each is a twelve-second film, which is
+the right length anyway.
 
 ## Continuity between clips
 
