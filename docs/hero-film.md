@@ -58,12 +58,34 @@ Before any video, generate **one still** that settles the look, then reference i
 everywhere. Reroll this single frame until it is right — it is the cheapest
 decision in the production and every shot inherits from it.
 
-> A single frame from a western adult animated series. A young man stands on a
-> sunlit city street, caught mid-stride, looking back over his shoulder with a
-> grin. Clean confident 2D linework of even weight, cel shading in few bold
-> tonal steps, heavy black shadow shapes across his jaw and jacket, saturated
-> comic-book colour, softly painted background buildings behind crisp character
-> art, warm rim light along his shoulder, subtle film grain.
+> The man in the reference image, redrawn as a single frame from a western
+> adult animated series. He stands on a sunlit city street, caught mid-stride,
+> looking back over his shoulder with a grin. Keep his face recognisable — same
+> jaw, same hairline, same brow. Clean confident 2D linework of even weight, cel
+> shading in few bold tonal steps, heavy black shadow shapes across his jaw and
+> jacket, saturated comic-book colour, softly painted background buildings
+> behind crisp character art, warm rim light along his shoulder, subtle film
+> grain.
+
+**Name the reference in the prompt.** Runway now hosts third-party image models
+alongside Gen-4, and only Gen-4 has the saved-Reference `@mention` mechanic —
+the others take attached images as plain conditioning. A prompt that says "a
+young man" gives any of them licence to invent a face. "The man in the reference
+image" does not. Note the phrasing is positive throughout: "keep his face
+recognisable", never "do not change his face", because negative phrasing is
+documented as producing the opposite.
+
+Stills are the cheap stage, so run the same prompt on two models and compare
+rather than agonising over the picker. Set the aspect ratio to 16:9 — the whole
+film is 16:9 and you do not want to crop his head back in later.
+
+### Do not leave this step until the frame passes all four
+
+- It looks like **him** at a glance, not a man with similar hair.
+- Linework is **clean and even in weight** — nothing scratchy or inconsistent.
+- Shadows are **bold flat shapes**, not soft gradients. That is the tell of this
+  style; gradients drift it toward generic 3D.
+- The background is **softer than he is** — painted, not detailed.
 
 ## The shots
 
@@ -125,9 +147,11 @@ six are five minutes in the app and one of them — the policy on depicting an
 identifiable real person — can stop the whole production after you have already
 spent on look dev.
 
-**1. Save him as a Reference.** In the *image* model, upload 1–3 photos of him
-and save them as a named Reference. One clean front-facing shot and one
-three-quarter angle beats five casual snaps. Shot 2 has him glancing back over
+**1. Save him as a Reference.** In the *image* model, upload photos of him and
+save them as a named Reference. Two specific angles matter far more than five
+casual snaps: **one clean front-facing head shot and one three-quarter or
+profile head shot.** Body and action shots contribute almost nothing here —
+what the model needs is face data from more than one direction. Shot 2 has him glancing back over
 his shoulder, and References pattern-matches in 2D rather than reconstructing a
 head — without a three-quarter reference, that shot returns a different person.
 
