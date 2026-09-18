@@ -39,56 +39,79 @@ every image and video model, but a blurple panel with rounded message bubbles
 and red play buttons on video rectangles reads instantly, and at vortex speed
 nobody could read text anyway.
 
+## The look: flat vector
+
+Completely flat. Smooth clean linework, flat colour fills, **no shading, no
+gradients, no highlights** — simplified and unrealistic in its rendering, while
+keeping his face and proportions accurate to the photographs.
+
+Flat colour is also the kindest thing you can hand a video model: no gradients
+to band, no highlights to shimmer, no soft shading to boil. It should animate
+more cleanly than a shaded version would.
+
+### Flatten the character sheet first
+
+The original sheet is soft-shaded, so "match the reference" would fight "no
+shading". Convert it once, and use the flat version as the reference everywhere:
+
+> Redraw this character in a completely flat vector illustration style. Keep his
+> exact face, proportions, hair shape, outfit and pose. Smooth clean linework,
+> completely flat colour fills, no shading, no gradients, no highlights, no
+> texture.
+
+### The white-on-white problem
+
+His t-shirt is white and the background is white. With no shading to separate
+them the shirt disappears and you get a floating head, arms and trousers. Fix it
+in the prompt, the same way in all four stills: **a very light grey flat fill on
+the t-shirt and a clean dark outline around the figure.**
+
 ## The stills — ChatGPT, 16:9
 
-**Attach the character sheet to all four**, including the vortex, where it acts
-as a style reference only.
-
-**Do not describe the style in words beyond matching the reference.** The sheet
-is smooth soft shading with clean linework and natural colour — not cel shading,
-and not flat comic colour. Earlier prompts specified a rendering that fought the
-sheet and the results looked worse for it. "Drawn in exactly the same rendering
-style as the reference image" is a stronger instruction than any adjective list,
-because the reference cannot drift and a description can.
-
-Negative phrasing is fine here; the warning against it applies to Runway's
-motion prompts, not to image models.
+**Attach the flattened character sheet to all four**, including the vortex,
+where it acts as a style reference only. Negative phrasing is fine here; the
+warning against it applies to Runway's motion prompts, not to image models.
 
 **1 — The turn**
 
-> The character in the reference image, drawn in exactly the same rendering
-> style — smooth soft shading, clean linework, natural colour, same face and
-> outfit. He is close to the camera, seen from behind from roughly the waist up,
-> turning his head back over his left shoulder to look at the viewer, his left
-> arm reaching back toward the camera with the hand open and near the lens. Pure
-> white empty background — no floor, no horizon, no shadows, nothing but white.
+> The character in the reference image, drawn in exactly the same flat vector
+> illustration style — smooth clean linework, completely flat colour fills, no
+> shading, no gradients, no highlights. Same face and outfit, with a very light
+> grey t-shirt and a clean dark outline around the figure. He is close to the
+> camera, seen from behind from roughly the waist up, turning his head back over
+> his left shoulder to look at the viewer, his left arm reaching back toward the
+> camera with the hand open and near the lens. Pure white empty background — no
+> floor, no horizon, no shadows, nothing but white.
 
 **2 — The run**
 
-> The character in the reference image, drawn in exactly the same rendering
-> style — smooth soft shading, clean linework, natural colour, same face and
-> outfit. Seen from behind, running away from the camera into empty white space.
-> Far ahead of him an old boxy black CRT television floats at the centre of the
-> frame, its curved glass screen showing grey no-signal static. Pure white empty
-> background — no floor, no horizon, no shadows.
+> The character in the reference image, drawn in exactly the same flat vector
+> illustration style — smooth clean linework, completely flat colour fills, no
+> shading, no gradients. Same face and outfit, very light grey t-shirt, clean
+> dark outline around the figure. Seen from behind, running away from the camera
+> into empty white space. Far ahead of him an old boxy black CRT television
+> floats at the centre of the frame, its curved glass screen a flat grey
+> no-signal tone. Pure white empty background — no floor, no horizon, no
+> shadows.
 
 **3 — The dive**
 
-> The character in the reference image, drawn in exactly the same rendering
-> style — smooth soft shading, clean linework, natural colour, same face and
-> outfit. Seen from behind, diving head first with both arms stretched forward
-> toward a large old boxy black CRT television directly ahead. The television's
-> curved glass screen fills much of the frame, showing grey no-signal static.
-> Pure white empty background — no floor, no shadows.
+> The character in the reference image, drawn in exactly the same flat vector
+> illustration style — smooth clean linework, completely flat colour fills, no
+> shading, no gradients. Same face and outfit, very light grey t-shirt, clean
+> dark outline around the figure. Seen from behind, diving head first with both
+> arms stretched forward toward a large old boxy black CRT television directly
+> ahead. The television's curved glass screen fills much of the frame, a flat
+> grey no-signal tone. Pure white empty background — no floor, no shadows.
 
 **4 — The vortex**
 
-> Looking down the inside of a swirling tunnel of light and colour, drawn in the
-> same rendering style as the reference image — smooth soft shading, clean
-> linework, natural colour. On the right wall a floating glowing blurple-purple
-> chat panel with rounded message bubbles. On the left wall floating video
-> rectangles with red play buttons. Bright white light at the far end of the
-> tunnel.
+> Looking down the inside of a swirling tunnel, drawn in the same flat vector
+> illustration style as the reference image — smooth clean linework, completely
+> flat colour fills, no shading, no gradients. Flat bands of colour spiralling
+> down the tunnel. On the right wall a flat blurple-purple chat panel with
+> rounded message bubbles. On the left wall flat video rectangles with red play
+> buttons. Bright white light at the far end of the tunnel.
 
 ## The motion prompts — Runway, image-to-video
 
@@ -122,8 +145,9 @@ Then send the export over and it gets cut to a loop, compressed and wired into
 
 His likeness is settled by a **full-body character turnaround** — front and
 three-quarter, same face, same wardrobe — generated in ChatGPT from photographs
-of him. That sheet is the reference attached to every still that has him in it,
-and it locks build and clothing as well as the face, which a portrait would not.
+of him, then flattened to the no-shading look above. That flat sheet is the
+reference attached to every still, and it locks build and clothing as well as
+the face, which a portrait would not.
 
 Getting there took several wrong turns worth not repeating:
 
