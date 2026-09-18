@@ -233,29 +233,32 @@ one transform, and perspective does the scaling for free.
 
 What makes it sit inside the plate rather than on top of it:
 
-- **The stage's perspective origin is the plate's vanishing point** (60% / 35%),
-  so both walls converge exactly where the light is.
-- **The flow is eased, not linear** (`p^1.32`). The plate accelerates into the
+- **The stage's perspective origin is the plate's vanishing point** (50% / 42%
+  on the clean plate), so both walls converge exactly where the light is.
+- **The flow is eased, not linear** (`p^1.40`). The plate accelerates into the
   blowout; a constant slide reads as a sticker sliding over the shot.
 - **Every edge of the strip is feathered** with a two-axis mask, so cards fade in
   at the vanishing point and blur out past the frame instead of ending on a line.
-- **The walls wash out from 3.25s** as the light takes the frame.
-- **The walls are pushed out to ±940px** so the tunnel's core, and the figure
+- **The walls wash out from 2.70s** as the light takes the frame.
+- **The walls are pushed out to ±1080px** so the tunnel's core, and the figure
   falling through it, stay clear.
 - **Every card is lit by the tunnel**: a rim glow in the wall's colour, a wash of
   that colour across its face, and a motion blur that grows with how fast the
   card is going past. Nothing in the plate is sharp — it is all speed and bloom —
   so a crisp rectangle is the loudest "pasted on" tell there is.
 
-The one thing left that reads as clutter is not the composite. The plate has
-Runway's own **fake** Discord and YouTube panels baked into both walls, so there
-are two sets of UI in the shot competing: garbled ones underneath, real ones on
-top. That is why beat C's prompt asks for panels of light and no interfaces —
-with a clean tunnel the real content is the only content in frame.
+The first plate had Runway's own **fake** Discord and YouTube panels baked into
+both walls, so two sets of UI competed in the shot: garbled ones underneath, real
+ones on top. The clean-tunnel plate fixed that — the real content is now the only
+content in frame, which is what the prompts below are for.
 
 The Discord side runs the giveaway live: the counter climbs to 1,500, the timer
-runs down, and the embed flips to the winners at 2.00s — while the card is at its
+runs down, and the embed flips to the winners at 1.70s — while the card is at its
 most readable, which is what the ordering of the cards on the strip is for.
+
+**Every one of these numbers is per plate.** A new tunnel means re-finding its
+vanishing point and re-timing the flow to how fast it moves and when it blows
+out; nothing carries over but the layout.
 
 Then the export gets cut to a loop, compressed and wired into
 `NEXT_PUBLIC_HERO_VIDEO`, which `src/components/hero-room.tsx` already reads.
