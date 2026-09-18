@@ -91,59 +91,102 @@ phone, a white bedsheet and twenty minutes. Real footage beats generated
 footage every time and costs nothing, which leaves Runway only the two shots
 that cannot be filmed: the dive through the glass and the vortex.
 
-## The six clips
+## Three chained beats, not six cuts
 
-Each still is the first frame of its clip. The motion prompt describes motion
-and nothing else — the still already carries subject, colour and style, and
-re-describing them fights the image.
+The joins are the problem. Six clips generated from six independent stills have
+nothing in common at their edges, so every join is a cut no matter how it is
+trimmed, and a dissolve only softens it. The fix is not a transition. It is to
+generate each clip **from the last frame of the one before it** — then the next
+clip's first frame *is* the previous clip's last frame, and the join does not
+exist.
 
-Draft everything on **Gen-4 Turbo** at 5 credits/sec. Re-run a keeper on
-**Gen-4.5** at 12 only once its motion is right.
+Gen-4 takes a start image and no end image, so this is the only way to chain it.
 
-| # | Clip | Len | Model | Motion prompt |
+### How to chain
+
+1. Generate beat A from its still.
+2. Download A and find its **last clean frame** — not necessarily the last one,
+   because the final few frames of a generated clip are where the warping
+   lives. Export that frame at full resolution.
+3. Trim A's tail back to that frame.
+4. Feed that frame as the start image for beat B, with B's motion prompt.
+5. Repeat for C.
+
+If a finished generation offers **Extend**, use that instead of steps 2–4: it
+continues from the end of the clip conditioned on the motion rather than on one
+still, so it holds speed and direction better. Chaining by frame is the fallback
+that always works.
+
+What chaining costs you:
+
+- Same model, same resolution, same aspect ratio on every beat. A mismatch shows
+  up at the join as a colour or sharpness pop.
+- **Each beat gets used in full.** The only trims that stay seamless are the head
+  of the first beat and the tail of the last, because those ends join nothing.
+  So three 5s beats is a 15s film, trimmed at both ends to about 12s — that is
+  the reason for three beats and not six.
+- The look, wardrobe and lighting ride on the start frame. Keep the prompt to
+  motion only.
+
+### The three beats
+
+Draft on **Gen-4 Turbo** at 5 credits/sec. Re-run a keeper on **Gen-4.5** at 12
+only once its motion is right. Beat C is the one worth 4.5.
+
+| # | Beat | Len | Start image | Motion prompt |
 |---|---|---|---|---|
-| 1 | Reach | 5s | Turbo | `The man reaches his open hand further toward the camera and beckons. The camera drifts slowly forward toward him.` |
-| 2 | Run | 5s | Turbo | `The man runs forward away from the camera toward the television. The camera follows him at running pace. The television grows larger.` |
-| 3 | He dives in | 5s | Turbo | `The man dives forward into the television screen and disappears through it. The camera follows close behind him.` |
-| 4 | POV at screen | 5s | Turbo | `The camera pushes forward toward the screen. The hands press into the glass and the static ripples where they touch.` |
-| 5 | POV through | 5s | Turbo | `The camera plunges forward into the screen. The lightning flares and the light fills the frame.` |
-| 6 | Vortex | 10s | **Gen-4.5** | `The camera flies forward down the tunnel behind the man. It turns right to the purple chat bubbles, then left to the video screens, then faces forward as the white light ahead grows and fills the frame.` |
+| A | Turn, reach, run | 5s | still 1 | `He turns back over his left shoulder and reaches his left hand back toward the camera, then faces forward and runs. The camera moves forward with him at running pace. The small black television far ahead grows larger. Camera at eye level, 35mm.` |
+| B | The dive | 5s | A's last clean frame | `He runs the last steps and dives head first into the television screen. His legs disappear through the glass. The camera keeps pushing forward and the television fills the frame.` |
+| C | Through, and the vortex | 5s | B's last clean frame | `The camera pushes through the screen into a tunnel of streaming light. Rectangular glowing panels rush past along the left and right walls, cool purple on the right, red on the left. The white light ahead grows until it fills the frame.` |
 
-Clip 6 is the only one that needs Gen-4.5: three camera moves in one prompt, and
-Gen-4 blurs sequenced direction together. If it still comes back confused, split
-it into two five-second clips — right turn, then left turn.
+Two notes on beat C. Ask for **panels of light**, not for chat windows or video
+players — the real Discord and YouTube content is composited onto those walls
+afterwards, and generated UI underneath only fights it. And ask for the colour
+split, purple right and red left, because that is what makes the composite look
+like it belongs rather than like it was pasted on.
 
-The white light filling frame at the end of clip 6 is the ending.
+The white light filling frame at the end of beat C is the ending.
 
 ## The assembly
 
-Eight cuts, 12.00s total, hard cuts throughout — each clip opens roughly where
-the last one ended. The two inserts are not generated; they are the coded
-Discord and YouTube animations, dropped in where the vortex looks right and
-left.
+Six beats, 11.76s. The Discord and YouTube animations are **not cuts of their
+own** — they live on the walls of the vortex, Discord right and YouTube left,
+composited into the plate so they are inside the shot rather than next to it.
 
-| # | source | in | length | on screen |
-|---|--------|----|--------|-----------|
-| 1 | reach   | 0.00 | 1.5 | 0.0 |
-| 2 | run     | 0.00 | 1.5 | 1.5 |
-| 3 | dive    | 0.00 | 1.5 | 3.0 |
-| 4 | legs    | 0.00 | 1.2 | 4.5 |
-| 5 | POV     | 0.00 | 1.0 | 5.7 |
-| 6 | Discord | 2.00 | 1.3 | 6.7 |
-| 7 | YouTube | 1.00 | 1.3 | 8.0 |
-| 8 | vortex  | 2.34 | 2.7 | 9.3 |
+| # | source | length | on screen |
+|---|--------|--------|-----------|
+| 1 | reach              | 1.50 | 0.00 |
+| 2 | run                | 1.50 | 1.50 |
+| 3 | dive               | 1.50 | 3.00 |
+| 4 | legs through       | 1.20 | 4.50 |
+| 5 | POV alone          | 1.00 | 5.70 |
+| 6 | vortex + walls     | 5.04 | 6.70 |
 
-Three things are worth writing down, because each one cost a rebuild:
+Joins are a 150ms dissolve. That is a stopgap: once the beats are generated as a
+chain the joins carry themselves and the dissolves come out.
 
-- **Trim the first ~1s off the YouTube insert.** The three tiles animate up over
-  the first second, and the left one is still black at 0.6s. Starting the cut at
-  1.00 means all three are already running.
-- **Punch in on both inserts.** They were laid out for a full 1920×1080 frame; in
-  a 1.3s glimpse at 720p the Discord embed is unreadable. 1.55× on Discord and
-  1.15× on YouTube, centre-cropped, fixes it.
-- **The vortex has to end on white.** It is the last 2.7s of a 5.04s clip, so it
-  is rolled behind the two inserts and only raised once it has played down to
-  2.34s. See below for why it cannot simply be seeked to.
+### The vortex walls
+
+The walls are two long strips lying along the tunnel in CSS 3D, one either side,
+with the cards laid out across each strip. The strip's local X *is* tunnel
+depth, so sliding one strip in X is what makes its cards stream past the camera —
+one transform, and perspective does the scaling for free.
+
+What makes it sit inside the plate rather than on top of it:
+
+- **The stage's perspective origin is the plate's vanishing point** (60% / 35%),
+  so both walls converge exactly where the light is.
+- **The flow is eased, not linear** (`p^1.32`). The plate accelerates into the
+  blowout; a constant slide reads as a sticker sliding over the shot.
+- **Every edge of the strip is feathered** with a two-axis mask, so cards fade in
+  at the vanishing point and blur out past the frame instead of ending on a line.
+- **The walls wash out from 3.25s** as the light takes the frame.
+- **The walls are pushed out to ±940px** so the tunnel's core, and the figure
+  falling through it, stay clear.
+
+The Discord side runs the giveaway live: the counter climbs to 1,500, the timer
+runs down, and the embed flips to the winners at 2.00s — while the card is at its
+most readable, which is what the ordering of the cards on the strip is for.
 
 Then the export gets cut to a loop, compressed and wired into
 `NEXT_PUBLIC_HERO_VIDEO`, which `src/components/hero-room.tsx` already reads.
@@ -161,7 +204,8 @@ every cut — eight black flashes across the film.
 
 The Runway clips converted through ezgif come back **VP9 at 1280×720**. The
 downscale is ezgif's, not Runway's; a 1080p master needs a conversion that keeps
-the resolution. VP9 also rules out most local tooling, which only decodes VP8.
+the resolution. VP9 also rules out most local tooling, which only decodes VP8 —
+which is why the inserts, not the plates, are the ones that get pre-trimmed.
 
 ## Likeness: what was learned the hard way
 
