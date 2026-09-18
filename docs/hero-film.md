@@ -295,11 +295,65 @@ at 5 credits/sec; once framing and motion are locked, run the keeper on
 frame of the next. That forward chaining is what makes five clips read as one
 take. Do not plan on an end-frame keyframe — see below.
 
-**6. Post.** Composite the wordmark plate onto the television, drop your real
-YouTube clips and a Discord capture into the blank screens in shot 4, grade the
-five clips to match, add grain, and cut the film at the whiteout in shot 5.
+**6. Post.** See below — five clips are not yet a film.
 
-**7. Web.** Send me the file. I will cut the loop, compress it, and wire it up.
+**7. Web.** Send me the files. I will cut the loop, compress it, and wire it up.
+
+## The edit
+
+Resolve if you will take the learning curve — you need its tracker for shot 4.
+CapCut if you want it done fast.
+
+**Rough cut first.** All five in order, no effects, no grade. One question:
+does the story read? If a beat does not land, regenerate that shot now, before
+any finishing work goes into it.
+
+**Trim heads and tails.** Generated clips are weakest in the first and last half
+second, where drift and warping show. Cutting a five-second clip to three and a
+half seconds of its strongest middle is normal and tightens the film.
+
+**Composite.** The wordmark plate onto the television in shots 3 and 5. Real
+YouTube clips and a Discord capture into the blank screens in shot 4.
+
+**Grade to match.** Five generations come back with five slightly different
+colour casts. Matching them is what makes the result one film rather than five
+clips.
+
+**One grain layer over the finished cut**, not per clip. It unifies the sources
+and hides much of the line boil that 2D gives you.
+
+### The joins
+
+Mostly hard cuts — forward chaining means each shot opens on the previous
+shot's last frame, so they flow without help. Two exceptions: **shot 3 into 4**
+is the through-the-screen moment and earns a whip blur or a two-frame white
+flash, and **shot 5 holds on the whiteout** rather than cutting, because the
+website fades up out of that white. If a join looks wrong, a small speed ramp
+into the cut usually fixes it faster than regenerating.
+
+### Sound is about 40% of this
+
+Silent, the film reads as a tech demo. Five elements cover it: street ambience
+under shots 1 and 2, a launch accent on the leap, a whoosh through the screen, a
+rising drone through the tunnel, then a hard cut to near-silence on arrival with
+a single television click and hum. **The cut to near-silence is the money
+moment** — loud tunnel into sudden quiet is what makes the landing feel like
+arriving somewhere.
+
+### If shot 4 fights you
+
+Tracking screens into a flying camera is the hardest thing in this edit. If it
+does not come together, **leave the screens glowing and blank.** It still reads
+as a tunnel of channels, the film still works, and the YouTube content already
+has a home on the site. One difficult VFX shot is not worth blocking a finished
+film over.
+
+### Export three things
+
+- The **full cut**, roughly 20–25 seconds with sound — YouTube trailer and
+  Discord invite.
+- A **silent 3–4 second slice** of vortex-to-arrival — the website hero loop.
+- A **poster frame** for first paint.
 
 ## Two things Runway will get wrong
 
