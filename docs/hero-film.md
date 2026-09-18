@@ -149,7 +149,7 @@ The white light filling frame at the end of beat C is the ending.
 
 ## The assembly
 
-Six beats, 11.76s. The Discord and YouTube animations are **not cuts of their
+Five beats, 10.96s. The Discord and YouTube animations are **not cuts of their
 own** — they live on the walls of the vortex, Discord right and YouTube left,
 composited into the plate so they are inside the shot rather than next to it.
 
@@ -158,12 +158,34 @@ composited into the plate so they are inside the shot rather than next to it.
 | 1 | reach              | 1.50 | 0.00 |
 | 2 | run                | 1.50 | 1.50 |
 | 3 | dive               | 1.50 | 3.00 |
-| 4 | legs through       | 1.20 | 4.50 |
-| 5 | POV alone          | 1.00 | 5.70 |
-| 6 | vortex + walls     | 5.04 | 6.70 |
+| 4 | legs through       | 1.40 | 4.50 |
+| 5 | vortex + walls     | 5.04 | 5.90 |
+
+**The sixth plate is cut.** POV alone at the television showed the set empty and
+further away than the shot before it, so on screen the man vanished and the
+television stepped backwards. The legs plate already has the POV hands in frame,
+so it *is* the POV shot and nothing is lost by going straight from it into the
+screen.
 
 Joins are a 150ms dissolve. That is a stopgap: once the beats are generated as a
 chain the joins carry themselves and the dissolves come out.
+
+### What the joins actually cost
+
+Three of the five joins in the six-plate cut were broken, and it is worth being
+precise about which, because only two of them need Runway:
+
+| join | verdict |
+|---|---|
+| reach → run | **broken.** He is a close-up facing camera, then instantly far away mid-run. The reach plate never turns him round. |
+| run → dive | **broken.** Mid-run with the television small and distant, then airborne with it filling frame. Several metres missing. |
+| dive → legs | fine as a cut. The camera moves, the action continues — ordinary cutting. |
+| legs → POV | **broken, and free to fix.** Fixed by cutting the POV plate, as above. |
+| POV → vortex | fine as a cut, and now reads better as legs → vortex: the punch through the glass. |
+
+So the chain is worth two generations, not three. Beats A and B below fix the
+two joins that are genuinely broken; the existing vortex can stay, or be
+regenerated separately for the clean-tunnel reason in the assembly notes.
 
 ### The vortex walls
 
