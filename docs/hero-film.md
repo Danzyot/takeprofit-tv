@@ -117,12 +117,51 @@ The white light filling frame at the end of clip 6 is the ending.
 
 ## The assembly
 
-Put the six clips in order in Runway's editor and export. Hard cuts throughout —
-each clip opens roughly where the last ended. Trim the first and last few frames
-of any clip that warps; that is where generated clips are weakest.
+Eight cuts, 12.00s total, hard cuts throughout — each clip opens roughly where
+the last one ended. The two inserts are not generated; they are the coded
+Discord and YouTube animations, dropped in where the vortex looks right and
+left.
+
+| # | source | in | length | on screen |
+|---|--------|----|--------|-----------|
+| 1 | reach   | 0.00 | 1.5 | 0.0 |
+| 2 | run     | 0.00 | 1.5 | 1.5 |
+| 3 | dive    | 0.00 | 1.5 | 3.0 |
+| 4 | legs    | 0.00 | 1.2 | 4.5 |
+| 5 | POV     | 0.00 | 1.0 | 5.7 |
+| 6 | Discord | 2.00 | 1.3 | 6.7 |
+| 7 | YouTube | 1.00 | 1.3 | 8.0 |
+| 8 | vortex  | 2.34 | 2.7 | 9.3 |
+
+Three things are worth writing down, because each one cost a rebuild:
+
+- **Trim the first ~1s off the YouTube insert.** The three tiles animate up over
+  the first second, and the left one is still black at 0.6s. Starting the cut at
+  1.00 means all three are already running.
+- **Punch in on both inserts.** They were laid out for a full 1920×1080 frame; in
+  a 1.3s glimpse at 720p the Discord embed is unreadable. 1.55× on Discord and
+  1.15× on YouTube, centre-cropped, fixes it.
+- **The vortex has to end on white.** It is the last 2.7s of a 5.04s clip, so it
+  is rolled behind the two inserts and only raised once it has played down to
+  2.34s. See below for why it cannot simply be seeked to.
 
 Then the export gets cut to a loop, compressed and wired into
 `NEXT_PUBLIC_HERO_VIDEO`, which `src/components/hero-room.tsx` already reads.
+
+### Gotchas if this is rebuilt
+
+The clips carry no usable seek index — setting `currentTime` on one lands back
+on frame 0 and stays there, silently, so any cut with an in-point plays its
+first frame frozen for its whole length. Either pre-trim the clip, or start it
+early behind the previous cut and raise it when it gets to the in-point.
+
+Cut by raising the incoming clip on top and retiring the outgoing one two frames
+later. Hiding the outgoing clip on the same frame leaves one frame of black at
+every cut — eight black flashes across the film.
+
+The Runway clips converted through ezgif come back **VP9 at 1280×720**. The
+downscale is ezgif's, not Runway's; a 1080p master needs a conversion that keeps
+the resolution. VP9 also rules out most local tooling, which only decodes VP8.
 
 ## Likeness: what was learned the hard way
 
