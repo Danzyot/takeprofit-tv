@@ -197,8 +197,8 @@ export default function HomePage() {
       <ColourBars className="h-1" />
 
       {/* ---------- the code ---------- */}
-      <section id="code" className="bg-ink-2 px-5 py-[clamp(3rem,9vh,6rem)]">
-        <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-[6fr_5fr] lg:gap-16">
+      <section id="code" className="bg-ink-2 px-5 py-[clamp(2.5rem,7vh,4.5rem)]">
+        <div className="mx-auto flex max-w-5xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
           <div>
             <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber">
               Code {SITE.code}
@@ -206,47 +206,19 @@ export default function HomePage() {
             <h2 className="mt-3 max-w-[18ch] font-display text-[clamp(1.9rem,6vw,3.5rem)] font-black uppercase leading-[0.9] tracking-[-0.02em]">
               The best discount we can get on {firm.name}
             </h2>
-            <p className="mt-5 max-w-[46ch] text-sm leading-relaxed text-dim">
-              It costs you nothing extra — the code applies the best price we
-              have been able to negotiate. The firm pays us a commission, and
-              that commission is what pays for the giveaways, the bots and the
-              videos. Nothing here is behind a paywall.
-            </p>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <CopyCode />
-              <a
-                href={firm.url}
-                target="_blank"
-                rel="noopener noreferrer sponsored"
-                className="inline-flex items-center gap-2.5 bg-amber px-5 py-3.5 font-display text-lg font-black uppercase tracking-wide text-ink transition hover:bg-bone"
-              >
-                Start Trading
-                <ArrowIcon className="h-4 w-4" />
-              </a>
-            </div>
           </div>
 
-          <div className="border border-[var(--rule)] bg-ink p-6">
-            <div className="flex items-baseline justify-between gap-3">
-              <h3 className="font-display text-2xl font-black uppercase leading-none">
-                {firm.name}
-              </h3>
-              <span className="shrink-0 font-mono text-[10px] uppercase tracking-[0.15em] text-amber">
-                {firm.discount}
-              </span>
-            </div>
-            <ul className="mt-5 space-y-2 border-t border-[var(--rule)] pt-5 text-xs leading-relaxed text-bone/80">
-              {firm.features.map((feature) => (
-                <li key={feature} className="flex gap-2.5">
-                  <span className="text-amber">—</span>
-                  {feature}
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 font-mono text-[10px] uppercase leading-relaxed tracking-[0.15em] text-dim">
-              More firms on the way. Announced in the Discord first.
-            </p>
+          <div className="flex flex-wrap items-center gap-4">
+            <CopyCode />
+            <a
+              href={firm.url}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="inline-flex items-center gap-2.5 bg-amber px-5 py-3.5 font-display text-lg font-black uppercase tracking-wide text-ink transition hover:bg-bone"
+            >
+              Start Trading
+              <ArrowIcon className="h-4 w-4" />
+            </a>
           </div>
         </div>
       </section>
