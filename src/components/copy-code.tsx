@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { CopyIcon } from "@/components/icons";
 import { SITE } from "@/lib/site";
 
 /**
@@ -40,7 +41,8 @@ export function CopyCode({
       className={`inline-flex items-center gap-3 bg-amber px-4 py-2.5 font-display text-2xl font-black uppercase leading-none tracking-wide text-ink transition hover:bg-bone ${className}`}
     >
       {code}
-      <span className="font-mono text-[10px] font-bold uppercase tracking-[0.15em]">
+      <span className="flex items-center gap-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.15em]">
+        <CopyIcon className="h-3.5 w-3.5" />
         {copied ? "Copied" : "Copy"}
       </span>
     </button>

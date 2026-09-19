@@ -18,7 +18,7 @@ export function SiteHeader() {
             href={LINKS.discord}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-bone px-3.5 py-2 font-display text-base font-black uppercase tracking-wide text-ink transition hover:bg-amber sm:px-4"
+            className="inline-flex items-center gap-2 bg-blurple px-3.5 py-2 font-display text-base font-black uppercase tracking-wide text-bone transition hover:bg-bone hover:text-ink sm:px-4"
           >
             <DiscordIcon className="h-4 w-4" />
             Join

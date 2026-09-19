@@ -19,16 +19,15 @@ const spaceMono = Space_Mono({
 });
 
 const description =
-  `${SITE.name} is a futures trading community that runs like a channel. ` +
-  `Free Discord, content on YouTube, and the best available discount on prop ` +
-  `firm evaluations with code ${SITE.code}.`;
+  `${SITE.name} — free account giveaways, trading content. Discord and ` +
+  `YouTube. Use code ${SITE.code}.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
-  title: `${SITE.name} — Futures Community`,
+  title: SITE.name,
   description,
   openGraph: {
-    title: `${SITE.name} — Futures Community`,
+    title: SITE.name,
     description,
     url: SITE.url,
     siteName: SITE.name,
@@ -47,16 +46,14 @@ export default function RootLayout({
       className={`${shoulders.variable} ${spaceMono.variable}`}
     >
       <head>
-        {/* Two decisions that have to be made before first paint.
-            The effects preference, so someone who turned the texture off
-            never sees it flash. And whether the channel tunes in: once per
-            tab, never for a visitor who has asked for reduced motion, and
-            with a timeout that gives the page back if the script that
-            clears it never runs. */}
+        {/* Whether the channel tunes in has to be decided before first
+            paint, or the site flashes behind the static. Once per tab,
+            never for a visitor who has asked for reduced motion, and with a
+            timeout that gives the page back if the script that clears it
+            never runs. */}
         <script
           dangerouslySetInnerHTML={{
             __html:
-              `try{if(localStorage.getItem("tptv-fx")==="off")document.documentElement.dataset.fx="off"}catch(e){}` +
               `try{var m=matchMedia("(prefers-reduced-motion: reduce)").matches,b=sessionStorage.getItem("tptv-booted");` +
               `if(!m&&!b){document.documentElement.dataset.boot="1";` +
               `setTimeout(function(){delete document.documentElement.dataset.boot},6000)}}catch(e){}`,

@@ -19,22 +19,22 @@ import { FIRMS, LINKS, SITE } from "@/lib/site";
  * half is far worse than a small scroll.
  */
 
+/* `kicker` is the phone-only line. On wider screens `line` says the same
+   thing at length, so showing both would be the card repeating itself. */
 const CHANNELS = [
   {
-    ch: "CH 01",
-    kicker: "The studio floor",
+    kicker: "Daily giveaways",
     title: "Discord",
-    line: "Open all day. Chat the session, levels, prop firm news, giveaways. Free to join, nothing to buy.",
+    line: "Daily giveaways. Free to join. Chat about trading, news and more.",
     cta: "Join the Discord",
     href: LINKS.discord,
     Icon: DiscordIcon,
     tone: "blurple",
   },
   {
-    ch: "CH 02",
-    kicker: "The broadcast",
+    kicker: "Trading content",
     title: "YouTube",
-    line: "Sessions and breakdowns, with the trades that went nowhere left in on purpose.",
+    line: "Trading content, vlogs and livestreams.",
     cta: "Watch on YouTube",
     href: LINKS.youtube,
     Icon: YoutubeIcon,
@@ -44,16 +44,6 @@ const CHANNELS = [
 
 export default function HomePage() {
   const firm = FIRMS[0];
-  const firmLink = (
-    <a
-      href={firm.url}
-      target="_blank"
-      rel="noopener noreferrer sponsored"
-      className="text-amber underline-offset-4 hover:underline"
-    >
-      {firm.name}
-    </a>
-  );
 
   return (
     <div className="flex min-h-[100svh] flex-col">
@@ -62,16 +52,16 @@ export default function HomePage() {
       <main className="flex flex-1 items-center px-5">
         <div className="mx-auto w-full max-w-5xl py-[clamp(0.5rem,2vh,2.5rem)]">
           <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-dim">
-            <span className="text-amber">●</span> On air — two channels
+            <span className="text-amber">●</span> On air
           </p>
           <h1 className="mt-2 max-w-[18ch] font-display text-[clamp(1.75rem,7vw,4.5rem)] sm:mt-3 font-black uppercase leading-[0.88] tracking-[-0.02em]">
-            A futures community that runs like a channel
+            Day trading community, content and giveaways
           </h1>
 
           <div className="mt-[clamp(0.75rem,2.6vh,2rem)] grid gap-2.5 sm:grid-cols-2 sm:gap-4">
-            {CHANNELS.map(({ ch, kicker, title, line, cta, href, Icon, tone }) => (
+            {CHANNELS.map(({ kicker, title, line, cta, href, Icon, tone }) => (
               <a
-                key={ch}
+                key={title}
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -80,8 +70,8 @@ export default function HomePage() {
                 }`}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-dim">
-                    {ch} · {kicker}
+                  <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-dim sm:hidden">
+                    {kicker}
                   </p>
                   <Icon
                     className={`h-5 w-5 shrink-0 ${
@@ -118,21 +108,18 @@ export default function HomePage() {
               here because this is the page that promotes it. */}
           <div className="mt-[clamp(0.75rem,2.6vh,2rem)] flex flex-wrap items-center gap-x-5 gap-y-2.5 border-t border-[var(--rule)] pt-[clamp(0.7rem,2.2vh,1.5rem)]">
             <CopyCode />
-            {/* Two versions rather than one sentence with pieces switched off:
-                hiding clauses inside a sentence leaves stray spaces and
-                punctuation, and it reads as broken English on exactly the
-                screens nobody tests. Both say the part that has to be said —
-                that we are paid, and that it costs the reader nothing. */}
-            <p className="max-w-[46ch] text-xs leading-relaxed text-dim sm:hidden">
-              <span className="text-bone">Code {SITE.code}</span> gets you our
-              best discount on {firmLink}. They pay us a commission — it costs
-              you nothing extra.
-            </p>
-            <p className="hidden max-w-[46ch] text-xs leading-relaxed text-dim sm:block">
-              <span className="text-bone">Code {SITE.code}</span> gets you the
-              best discount we can get on a {firmLink} evaluation. The firm pays
-              us a commission — it costs you nothing extra, and it is what pays
-              for all of this.
+            <p className="max-w-[46ch] text-xs leading-relaxed text-dim">
+              Use code <span className="text-bone">{SITE.code}</span> for the
+              BEST discount on{" "}
+              <a
+                href={firm.url}
+                target="_blank"
+                rel="noopener noreferrer sponsored"
+                className="text-amber underline-offset-4 hover:underline"
+              >
+                {firm.name}
+              </a>
+              . We use the commission to bring you DAILY account giveaways.
             </p>
           </div>
         </div>
