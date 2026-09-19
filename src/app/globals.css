@@ -555,3 +555,86 @@ body {
   background: var(--amber);
   box-shadow: 0 0 12px 3px rgba(255, 158, 44, 0.55);
 }
+
+/* ---------- the television frame ----------
+   One cabinet, used at three sizes: the two section screens and the small
+   ones around each clip. The bezel and the corner radius are variables so a
+   clip's frame is the same object scaled down, not a different object. */
+
+.tv {
+  --tv-bezel: 16px;
+  --tv-glass: 13px;
+  position: relative;
+  padding: var(--tv-bezel);
+  border-radius: calc(var(--tv-glass) + var(--tv-bezel) * 0.6);
+  background: linear-gradient(168deg, #292930 0%, #17171c 40%, #0c0c0f 100%);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.6),
+    0 30px 70px -28px rgba(0, 0, 0, 0.95);
+}
+.tv-sm {
+  --tv-bezel: 7px;
+  --tv-glass: 8px;
+}
+
+.tv-screen {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--tv-glass);
+  background: #0a0a0d;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.07),
+    inset 0 0 40px 8px rgba(0, 0, 0, 0.55);
+}
+/* curvature and phosphor, in one layer so it never doubles up */
+.tv-screen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(120% 80% at 50% -12%, rgba(255, 255, 255, 0.09), transparent 54%),
+    radial-gradient(120% 115% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.6) 100%),
+    repeating-linear-gradient(to bottom, rgba(0, 0, 0, 0.26) 0 1px, transparent 1px 3px);
+}
+[data-fx="off"] .tv-screen::after {
+  background:
+    radial-gradient(120% 115% at 50% 50%, transparent 60%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+/* the standby lamp on the cabinet */
+.tv-led {
+  position: absolute;
+  right: calc(var(--tv-bezel) + 2px);
+  bottom: calc(var(--tv-bezel) / 2 - 3px);
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 10px 2px rgba(255, 158, 44, 0.5);
+}
+
+/* the clips sit on a blurred, blown-up copy of themselves */
+.reel-glow {
+  position: absolute;
+  inset: -18% -10%;
+  z-index: -1;
+  background-image: url("/clips/glow.png");
+  background-size: cover;
+  background-position: center;
+  filter: blur(38px) saturate(1.9) brightness(1.05);
+  opacity: 0.85;
+}
+
+/* a nudge that there is more below, on the first screen only */
+.scroll-cue {
+  animation: scroll-cue 2.4s ease-in-out infinite;
+}
+@keyframes scroll-cue {
+  0%, 100% { transform: translateY(0); opacity: 0.55; }
+  50% { transform: translateY(5px); opacity: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .scroll-cue { animation: none; }
+}
