@@ -196,30 +196,19 @@ export default function HomePage() {
 
       <ColourBars className="h-1" />
 
-      {/* ---------- the code ---------- */}
-      <section id="code" className="bg-ink-2 px-5 py-[clamp(2.5rem,7vh,4.5rem)]">
-        <div className="mx-auto flex max-w-5xl flex-col gap-8 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
-          <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-amber">
-              Code {SITE.code}
-            </p>
-            <h2 className="mt-3 max-w-[18ch] font-display text-[clamp(1.9rem,6vw,3.5rem)] font-black uppercase leading-[0.9] tracking-[-0.02em]">
-              The best discount we can get on {firm.name}
-            </h2>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <CopyCode />
-            <a
-              href={firm.url}
-              target="_blank"
-              rel="noopener noreferrer sponsored"
-              className="inline-flex items-center gap-2.5 bg-amber px-5 py-3.5 font-display text-lg font-black uppercase tracking-wide text-ink transition hover:bg-bone"
-            >
-              Start Trading
-              <ArrowIcon className="h-4 w-4" />
-            </a>
-          </div>
+      {/* ---------- the code, one last time ---------- */}
+      <section id="code" className="bg-ink-2 px-5 py-[clamp(2rem,6vh,3.5rem)]">
+        <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-4">
+          <CopyCode />
+          <a
+            href={firm.url}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="inline-flex items-center gap-2.5 bg-amber px-5 py-3.5 font-display text-lg font-black uppercase tracking-wide text-ink transition hover:bg-bone"
+          >
+            Start Trading
+            <ArrowIcon className="h-4 w-4" />
+          </a>
         </div>
       </section>
 
