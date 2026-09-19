@@ -44,7 +44,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${shoulders.variable} ${spaceMono.variable} h-full`}
+      className={`${shoulders.variable} ${spaceMono.variable}`}
     >
       <head>
         {/* Two decisions that have to be made before first paint.
@@ -64,7 +64,7 @@ export default function RootLayout({
         />
       </head>
       <body className="grain">
-        <div className="site-shell flex min-h-full flex-col">{children}</div>
+        <div className="site-shell flex min-h-[100svh] flex-col">{children}</div>
         <BootSequence />
       </body>
     </html>
