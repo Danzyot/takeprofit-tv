@@ -35,15 +35,14 @@ export const LINKS = {
 /**
  * The posts shown in the X animation.
  *
- * PLACEHOLDERS — these are written, not real. Paste the actual posts in
- * here and they appear on the site; nothing else needs to change. Keep them
- * to roughly one or two lines each, which is what the screen fits.
+ * Edit this array and they change on the site; nothing else needs touching.
+ * Keep each one to roughly one or two lines, which is what the screen fits.
  */
 export const X_POSTS: string[] = [
-  "giveaway going live in #giveaways in 10 — 5 accounts today",
-  "new video up. NQ open, start to finish, nothing cut",
-  "winners posted. DMs going out now",
-  "live in 20. come sit in the session",
+  "Who needs a free Lucid account \u{1F440}",
+  "join our discord for daily giveaways",
+  "TakeprofitTV is going live in 20 minutes",
+  "How was your trading today?",
 ];
 
 export type Firm = {
