@@ -114,7 +114,7 @@ export default function HomePage() {
                 channels — it is a third thing on offer, not a caption.
                 The copy chip is a button, so the card cannot itself be a
                 link; the two controls carry the click instead. */}
-            <div className="mt-[clamp(0.6rem,2.1vh,2rem)] border border-amber/45 bg-amber/[0.06] p-[clamp(0.6rem,2vh,1.4rem)]">
+            <div className="mt-[clamp(0.6rem,2.1vh,2rem)] w-fit max-w-full border border-amber/45 bg-amber/[0.06] p-[clamp(0.6rem,2vh,1.4rem)]">
               <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-dim">
                 {firm.name}
               </p>
