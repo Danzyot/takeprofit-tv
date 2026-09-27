@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { XIcon } from "@/components/icons";
-import { SITE } from "@/lib/site";
+import { TptvMark } from "@/components/tptv-logo";
+import { SITE, X_POSTS } from "@/lib/site";
 
 /**
  * The timeline, filling up.
@@ -12,13 +12,6 @@ import { SITE } from "@/lib/site";
  * way a live feed behaves. The list is rendered twice and the window slides
  * through it, so the loop has no seam and nothing remounts as it goes round.
  */
-
-const POSTS = [
-  "giveaway going live in #giveaways in 10 — 5 accounts today",
-  "new video up. NQ open, start to finish, nothing cut",
-  "winners posted. DMs going out now",
-  "live in 20. come sit in the session",
-] as const;
 
 const ITEM = 66; // px per post, fixed so the slide is a whole number
 const SHOWN = 3;
@@ -43,9 +36,9 @@ export function XFeed() {
     return () => cancelAnimationFrame(frame.current);
   }, []);
 
-  const step = Math.floor(t / BEAT) % POSTS.length;
+  const step = Math.floor(t / BEAT) % X_POSTS.length;
   const slide = outCubic(clamp((t % BEAT) / (BEAT * SLIDE)));
-  const doubled = [...POSTS, ...POSTS];
+  const doubled = [...X_POSTS, ...X_POSTS];
 
   return (
     <div className="bg-black font-sans">
@@ -68,13 +61,9 @@ export function XFeed() {
               className="flex items-start gap-2.5 px-4"
               style={{ height: ITEM }}
             >
-              <Image
-                src="/cj.png"
-                alt=""
-                width={28}
-                height={28}
-                className="mt-3 h-7 w-7 shrink-0 rounded-full"
-              />
+              <span className="mt-3 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-ink">
+                <TptvMark className="h-4 w-4" />
+              </span>
               <div className="min-w-0 pt-3">
                 <p className="flex items-center gap-1.5 text-[11.5px] leading-none">
                   <span className="font-bold text-white">{SITE.name}</span>

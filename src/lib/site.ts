@@ -32,6 +32,20 @@ export const LINKS = {
   x: process.env.NEXT_PUBLIC_X_URL || "https://x.com/TakeProfitTV",
 } as const;
 
+/**
+ * The posts shown in the X animation.
+ *
+ * PLACEHOLDERS — these are written, not real. Paste the actual posts in
+ * here and they appear on the site; nothing else needs to change. Keep them
+ * to roughly one or two lines each, which is what the screen fits.
+ */
+export const X_POSTS: string[] = [
+  "giveaway going live in #giveaways in 10 — 5 accounts today",
+  "new video up. NQ open, start to finish, nothing cut",
+  "winners posted. DMs going out now",
+  "live in 20. come sit in the session",
+];
+
 export type Firm = {
   /** Stable key — also the logo filename in /public/firms/<slug>.png. */
   slug: string;
