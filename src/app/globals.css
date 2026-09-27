@@ -631,9 +631,11 @@ body {
 .scroll-cue {
   animation: scroll-cue 2.4s ease-in-out infinite;
 }
+/* Bobs UP, not down. Moving down pushes it past the bottom of the first
+   screen, which is the one thing this cue must not do. */
 @keyframes scroll-cue {
   0%, 100% { transform: translateY(0); opacity: 0.55; }
-  50% { transform: translateY(5px); opacity: 1; }
+  50% { transform: translateY(-5px); opacity: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .scroll-cue { animation: none; }

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { CopyCode } from "@/components/copy-code";
+import { FirmMark } from "@/components/firm-mark";
 import { ArrowIcon, DiscordIcon, XIcon, YoutubeIcon } from "@/components/icons";
 import { Tv } from "@/components/tv";
 import { DiscordGiveaway } from "@/components/discord-giveaway";
@@ -56,15 +57,15 @@ export default function HomePage() {
       <div className="flex min-h-[calc(100svh-4rem)] flex-col">
 
         <main className="flex flex-1 items-center px-5">
-          <div className="mx-auto w-full max-w-5xl py-[clamp(0.5rem,2vh,2.5rem)]">
+          <div className="mx-auto w-full max-w-5xl py-[clamp(0.25rem,1.4vh,2.5rem)]">
             <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-dim">
               <span className="text-amber">●</span> On air
             </p>
-            <h1 className="mt-2 max-w-[18ch] font-display text-[clamp(1.75rem,7vw,4.5rem)] sm:mt-3 font-black uppercase leading-[0.88] tracking-[-0.02em]">
+            <h1 className="mt-1.5 max-w-[18ch] font-display text-[clamp(1.6rem,7vw,4.5rem)] sm:mt-3 font-black uppercase leading-[0.88] tracking-[-0.02em]">
               Day trading community, content and giveaways
             </h1>
 
-            <div className="mt-[clamp(0.75rem,2.6vh,2rem)] grid gap-2.5 sm:grid-cols-2 sm:gap-4">
+            <div className="mt-[clamp(0.6rem,2.2vh,2rem)] grid gap-2.5 sm:grid-cols-2 sm:gap-4">
               {CHANNELS.map(({ kicker, title, line, cta, href, Icon, tone }) => (
                 <a
                   key={title}
@@ -110,28 +111,44 @@ export default function HomePage() {
               ))}
             </div>
 
-            {/* CH 03 — the code, and why it exists. The short version lives
-                here because this is the page that promotes it. */}
-            <div className="mt-[clamp(0.75rem,2.6vh,2rem)] flex flex-wrap items-center gap-x-5 gap-y-2.5 border-t border-[var(--rule)] pt-[clamp(0.7rem,2.2vh,1.5rem)]">
-              <CopyCode />
-              <p className="max-w-[46ch] text-xs leading-relaxed text-dim">
-                Use code <span className="text-bone">{SITE.code}</span> for the
-                BEST discount on{" "}
+            {/* The code, as its own card rather than a footnote under the
+                channels — it is a third thing on offer, not a caption.
+                The copy chip is a button, so the card cannot itself be a
+                link; the two controls carry the click instead. */}
+            <div className="mt-[clamp(0.6rem,2.1vh,2rem)] border border-amber/45 bg-amber/[0.06] p-[clamp(0.6rem,2vh,1.4rem)]">
+              <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
+                <p className="flex items-center gap-2 font-display text-[clamp(1rem,3.4vw,1.6rem)] font-black uppercase leading-none">
+                  <FirmMark />
+                  {firm.name}
+                </p>
+                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-amber">
+                  {firm.discount}
+                </span>
+              </div>
+
+              <p className="mt-1.5 text-xs leading-relaxed text-dim">
+                Use code <span className="font-bold text-amber">{SITE.code}</span>{" "}
+                for the BEST discount. The commission pays for the daily
+                giveaways.
+              </p>
+
+              <div className="mt-[clamp(0.5rem,1.5vh,1rem)] flex flex-wrap items-center gap-2">
+                <CopyCode compact />
                 <a
                   href={firm.url}
                   target="_blank"
                   rel="noopener noreferrer sponsored"
-                  className="text-amber underline-offset-4 hover:underline"
+                  className="inline-flex items-center gap-2 bg-amber px-4 py-2.5 font-display text-base font-black uppercase tracking-wide text-ink transition hover:bg-bone"
                 >
-                  {firm.name}
+                  Start Trading
+                  <ArrowIcon className="h-3.5 w-3.5" />
                 </a>
-                . We use the commission to bring you DAILY account giveaways.
-              </p>
+              </div>
             </div>
           </div>
         </main>
 
-        <p className="scroll-cue pb-4 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-dim">
+        <p className="scroll-cue pb-2.5 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-dim">
           ↓ Scroll
         </p>
       </div>

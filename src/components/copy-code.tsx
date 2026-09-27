@@ -12,9 +12,12 @@ import { SITE } from "@/lib/site";
 export function CopyCode({
   code = SITE.code,
   className = "",
+  compact = false,
 }: {
   code?: string;
   className?: string;
+  /** Sized to sit in a row with other controls rather than lead a section. */
+  compact?: boolean;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -38,7 +41,9 @@ export function CopyCode({
       type="button"
       onClick={copy}
       title={`Copy code ${code}`}
-      className={`inline-flex items-center gap-3 bg-amber px-4 py-2.5 font-display text-2xl font-black uppercase leading-none tracking-wide text-ink transition hover:bg-bone ${className}`}
+      className={`inline-flex items-center bg-amber font-display font-black uppercase leading-none tracking-wide text-ink transition hover:bg-bone ${
+        compact ? "gap-2.5 px-3.5 py-2.5 text-base" : "gap-3 px-4 py-2.5 text-2xl"
+      } ${className}`}
     >
       {code}
       <span className="flex items-center gap-1.5 font-mono text-[10px] font-bold uppercase tracking-[0.15em]">

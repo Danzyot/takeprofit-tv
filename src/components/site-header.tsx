@@ -16,7 +16,7 @@ export function SiteHeader() {
   const firm = FIRMS[0];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--rule)] bg-ink/90 backdrop-blur">
+    <header className="sticky top-0 z-50 h-16 bg-ink/90 shadow-[inset_0_-1px_0_var(--rule)] backdrop-blur">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between gap-3 px-4 sm:gap-4 sm:px-5">
         <Link
           href="/"
