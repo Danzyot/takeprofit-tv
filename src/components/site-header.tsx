@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { TptvWordmark } from "@/components/tptv-logo";
 import { BroadcastChrome } from "@/components/broadcast-chrome";
@@ -17,8 +18,24 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-[var(--rule)] bg-ink/90 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-5xl items-center justify-between gap-3 px-4 sm:gap-4 sm:px-5">
-        <Link href="/" aria-label="Takeprofit TV — home" className="shrink-0">
-          <TptvWordmark />
+        <Link
+          href="/"
+          aria-label="Takeprofit TV — home"
+          className="flex shrink-0 items-center gap-2.5"
+        >
+          <Image
+            src="/tptv-mark.png"
+            alt=""
+            width={36}
+            height={36}
+            priority
+            className="h-9 w-9"
+          />
+          {/* the mark's own lettering is four pixels tall at this size, so the
+              wordmark is what actually reads — shown once there is room */}
+          <span className="hidden sm:block">
+            <TptvWordmark variant="full" />
+          </span>
         </Link>
 
         <div className="flex items-center gap-2.5 sm:gap-4">

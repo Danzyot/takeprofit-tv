@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { TptvWordmark, ColourBars } from "@/components/tptv-logo";
 import { DiscordIcon, YoutubeIcon } from "@/components/icons";
@@ -10,6 +11,13 @@ export function SiteFooter() {
       <div className="mx-auto max-w-5xl px-5 py-14">
         <div className="grid gap-10 sm:grid-cols-[1.5fr_1fr_1fr]">
           <div>
+            <Image
+              src="/tptv-mark.png"
+              alt=""
+              width={44}
+              height={44}
+              className="mb-4 h-11 w-11"
+            />
             <TptvWordmark variant="full" />
             <p className="mt-4 max-w-[34ch] text-xs leading-relaxed text-dim">
               A futures community that runs like a channel. Discord, YouTube,

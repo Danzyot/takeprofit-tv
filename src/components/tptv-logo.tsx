@@ -6,8 +6,9 @@
  * size; the wordmark is live text in the display face so it inherits
  * colour and never ships as a blurry PNG.
  *
- * Kept in sync with src/app/icon.svg, public/tptv-logo.svg and
- * public/tptv-avatar.svg. Change one, change all four.
+ * The real brand mark is public/tptv-mark.png, which is also the favicon
+ * and the avatar in the X animation. This drawn version is kept only for
+ * places that need the shape in a single colour at small sizes.
  */
 
 const ACCENT = "#ff9e2c";

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { XIcon } from "@/components/icons";
-import { TptvMark } from "@/components/tptv-logo";
+import Image from "next/image";
 import { SITE, X_POSTS } from "@/lib/site";
 
 /**
@@ -61,9 +61,13 @@ export function XFeed() {
               className="flex items-start gap-2.5 px-4"
               style={{ height: ITEM }}
             >
-              <span className="mt-3 grid h-7 w-7 shrink-0 place-items-center rounded-full bg-ink">
-                <TptvMark className="h-4 w-4" />
-              </span>
+              <Image
+                src="/tptv-mark.png"
+                alt=""
+                width={28}
+                height={28}
+                className="mt-3 h-7 w-7 shrink-0 rounded-full"
+              />
               <div className="min-w-0 pt-3">
                 <p className="flex items-center gap-1.5 text-[11.5px] leading-none">
                   <span className="font-bold text-white">{SITE.name}</span>
