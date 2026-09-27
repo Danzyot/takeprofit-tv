@@ -62,6 +62,7 @@ export default function RootLayout({
       </head>
       <body className="grain">
         <div className="site-shell flex min-h-[100svh] flex-col">{children}</div>
+        <span className="hum" aria-hidden="true" />
         <BootSequence />
       </body>
     </html>

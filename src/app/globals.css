@@ -638,3 +638,54 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .scroll-cue { animation: none; }
 }
+
+/* ---------- the hum bar ----------
+   A television that is not quite locked drifts: a soft band of light rolls
+   down the picture, over everything, including the text. Kept at a few
+   percent so it reads as the set breathing rather than as a effect —
+   and stopped entirely for anyone who has asked for reduced motion. */
+
+.hum {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hum::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 30vh;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(206, 212, 220, 0.035) 26%,
+    rgba(228, 234, 242, 0.075) 50%,
+    rgba(206, 212, 220, 0.03) 72%,
+    transparent
+  );
+  animation: hum 26s linear infinite;
+}
+/* the seam where the picture does not quite meet itself */
+.hum::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(233, 238, 245, 0.11);
+  animation: hum-seam 26s linear infinite;
+}
+@keyframes hum {
+  from { transform: translateY(-34vh); }
+  to   { transform: translateY(104vh); }
+}
+@keyframes hum-seam {
+  from { transform: translateY(-19vh); }
+  to   { transform: translateY(119vh); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hum { display: none; }
+}

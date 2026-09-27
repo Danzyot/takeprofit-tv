@@ -12,6 +12,8 @@ export const SITE = {
   name: "Takeprofit TV",
   /** Short form, used in the logo mark and tight spaces. */
   short: "TPTV",
+  /** The handle on X, shown as a label and in the feed animation. */
+  handle: "@TakeProfitTV",
   /** The discount / affiliate code members type at firm checkouts. */
   code: "TP",
   tagline:
@@ -27,6 +29,7 @@ export const SITE = {
 export const LINKS = {
   discord: process.env.NEXT_PUBLIC_DISCORD_URL || "https://discord.gg/wawatrading",
   youtube: process.env.NEXT_PUBLIC_YOUTUBE_URL || "https://youtube.com/@cj_wawa",
+  x: process.env.NEXT_PUBLIC_X_URL || "https://x.com/TakeProfitTV",
 } as const;
 
 export type Firm = {

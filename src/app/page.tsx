@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { CopyCode } from "@/components/copy-code";
-import { ArrowIcon, DiscordIcon, YoutubeIcon } from "@/components/icons";
+import { ArrowIcon, DiscordIcon, XIcon, YoutubeIcon } from "@/components/icons";
 import { Tv } from "@/components/tv";
 import { DiscordGiveaway } from "@/components/discord-giveaway";
 import { YoutubeReel } from "@/components/youtube-reel";
+import { XFeed } from "@/components/x-feed";
 import { ColourBars } from "@/components/tptv-logo";
 import { FIRMS, LINKS, SITE } from "@/lib/site";
 
@@ -196,6 +197,35 @@ export default function HomePage() {
 
       <ColourBars className="h-1" />
 
+      {/* ---------- X ---------- */}
+      <section id="x" className="bg-ink-2 px-5 py-[clamp(3rem,9vh,6rem)]">
+        <div className="mx-auto grid max-w-5xl items-center gap-10 lg:grid-cols-[5fr_6fr] lg:gap-16">
+          <div>
+            <p className="font-mono text-[10px] uppercase tracking-[0.24em] text-bone">
+              X · {SITE.handle}
+            </p>
+            <h2 className="mt-3 max-w-[16ch] font-display text-[clamp(1.9rem,6vw,3.5rem)] font-black uppercase leading-[0.9] tracking-[-0.02em]">
+              Giveaways and uploads, announced
+            </h2>
+            <a
+              href={LINKS.x}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-8 inline-flex items-center gap-2.5 bg-bone px-5 py-3.5 font-display text-lg font-black uppercase tracking-wide text-ink transition hover:bg-amber"
+            >
+              <XIcon className="h-4 w-4" />
+              Follow on X
+            </a>
+          </div>
+
+          <Tv>
+            <XFeed />
+          </Tv>
+        </div>
+      </section>
+
+      <ColourBars className="h-1" />
+
       {/* ---------- the code, one last time ---------- */}
       <section id="code" className="bg-ink-2 px-5 py-[clamp(2rem,6vh,3.5rem)]">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-center gap-4">
@@ -213,16 +243,38 @@ export default function HomePage() {
       </section>
 
       <ColourBars className="h-1" />
-      <footer className="flex items-center justify-between gap-4 px-5 py-3">
-        <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-dim">
-          © {new Date().getFullYear()} {SITE.name}
-        </p>
-        <Link
-          href="/disclosures"
-          className="border border-[var(--rule)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-dim transition hover:border-amber hover:text-amber"
-        >
-          Disclosures
-        </Link>
+      <footer>
+        <div className="flex items-center justify-between gap-4 px-5 py-3">
+          <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-dim">
+            © {new Date().getFullYear()} {SITE.name}
+          </p>
+          <Link
+            href="/disclosures"
+            className="border border-[var(--rule)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.18em] text-dim transition hover:border-amber hover:text-amber"
+          >
+            Disclosures
+          </Link>
+        </div>
+
+        {/* every channel, once, on the last line of the page */}
+        <div className="flex items-center justify-center gap-2 border-t border-[var(--rule)] px-5 py-3">
+          {[
+            { href: LINKS.discord, label: "Discord", Icon: DiscordIcon, hover: "hover:border-blurple hover:text-blurple" },
+            { href: LINKS.youtube, label: "YouTube", Icon: YoutubeIcon, hover: "hover:border-rec hover:text-rec" },
+            { href: LINKS.x, label: "X", Icon: XIcon, hover: "hover:border-bone hover:text-bone" },
+          ].map(({ href, label, Icon, hover }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className={`flex h-9 w-9 items-center justify-center border border-[var(--rule)] text-dim transition ${hover}`}
+            >
+              <Icon className="h-4 w-4" />
+            </a>
+          ))}
+        </div>
       </footer>
     </>
   );
