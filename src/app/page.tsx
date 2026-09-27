@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { SiteHeader } from "@/components/site-header";
 import { CopyCode } from "@/components/copy-code";
-import { FirmMark } from "@/components/firm-mark";
 import { ArrowIcon, DiscordIcon, XIcon, YoutubeIcon } from "@/components/icons";
 import { Tv } from "@/components/tv";
 import { DiscordGiveaway } from "@/components/discord-giveaway";
@@ -116,20 +115,17 @@ export default function HomePage() {
                 The copy chip is a button, so the card cannot itself be a
                 link; the two controls carry the click instead. */}
             <div className="mt-[clamp(0.6rem,2.1vh,2rem)] border border-amber/45 bg-amber/[0.06] p-[clamp(0.6rem,2vh,1.4rem)]">
-              <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-1">
-                <p className="flex items-center gap-2 font-display text-[clamp(1rem,3.4vw,1.6rem)] font-black uppercase leading-none">
-                  <FirmMark />
-                  {firm.name}
-                </p>
-                <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-amber">
-                  {firm.discount}
-                </span>
-              </div>
+              <p className="font-mono text-[10px] uppercase tracking-[0.2em] text-dim">
+                {firm.name}
+              </p>
 
-              <p className="mt-1.5 text-xs leading-relaxed text-dim">
-                Use code <span className="font-bold text-amber">{SITE.code}</span>{" "}
-                for the BEST discount. The commission pays for the daily
-                giveaways.
+              <p className="mt-1.5 font-display text-[clamp(1.05rem,3.8vw,1.6rem)] font-black uppercase leading-[1.05] tracking-[-0.01em]">
+                Use code <span className="text-amber">{SITE.code}</span> for the
+                best discount
+              </p>
+
+              <p className="mt-1 text-[11px] leading-relaxed text-dim">
+                The commission pays for the daily giveaways.
               </p>
 
               <div className="mt-[clamp(0.5rem,1.5vh,1rem)] flex flex-wrap items-center gap-2">

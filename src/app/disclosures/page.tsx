@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { CopyCode } from "@/components/copy-code";
-import { LowerThird } from "@/components/lower-third";
 import { FIRMS, LINKS, SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -162,11 +161,9 @@ export default function DisclosuresPage() {
 
       <main className="flex-1 px-5 py-16">
         <div className="mx-auto max-w-3xl">
-          <LowerThird
-            channel="CH 04"
-            kicker="The small print, in plain English"
-            title="Disclosures"
-          />
+          <h1 className="lower-third font-display text-[clamp(44px,9vw,86px)] font-black uppercase leading-[0.86] tracking-[-0.02em]">
+            Disclosures
+          </h1>
 
           <div className="mt-8 flex flex-wrap items-center gap-4 border border-[var(--rule)] bg-ink-2 px-5 py-4">
             <p className="text-xs leading-relaxed text-dim">
