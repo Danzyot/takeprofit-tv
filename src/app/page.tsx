@@ -205,7 +205,7 @@ export default function HomePage() {
               X · {SITE.handle}
             </p>
             <h2 className="mt-3 max-w-[16ch] font-display text-[clamp(1.9rem,6vw,3.5rem)] font-black uppercase leading-[0.9] tracking-[-0.02em]">
-              Giveaways and uploads, announced
+              Code drops and announcements
             </h2>
             <a
               href={LINKS.x}
