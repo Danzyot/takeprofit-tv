@@ -24,6 +24,9 @@ const description =
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
+  /* With two domains pointing here, say in the HTML which one counts —
+     a redirect tells a browser, this tells a crawler. */
+  alternates: { canonical: "/" },
   title: SITE.name,
   description,
   openGraph: {

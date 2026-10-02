@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { SITE } from "@/lib/site";
 
@@ -6,15 +8,20 @@ import { SITE } from "@/lib/site";
  * — which, for a Discord-first community, is the main way people meet it.
  *
  * Drawn with the default font on purpose: fetching a webfont at build time
- * would make the build depend on the network for no real gain.
+ * would make the build depend on the network for no real gain. The mark is
+ * read off disk and inlined for the same reason — it is the real logo, not a
+ * drawn copy of it, and it still costs no network call.
  */
+
+const MARK = `data:image/png;base64,${readFileSync(
+  join(process.cwd(), "public", "tptv-mark.png")
+).toString("base64")}`;
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt = `${SITE.name} — futures trading community`;
 
 const ACCENT = "#ff9e2c";
-const ACCENT_BRIGHT = "#f2f0ea";
 
 export default function Image() {
   return new ImageResponse(
@@ -34,20 +41,7 @@ export default function Image() {
         }}
       >
         <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-          <svg
-            width="112"
-            height="112"
-            viewBox="0 0 64 64"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <rect x="4" y="9" width="56" height="40" rx="11" stroke={ACCENT} strokeWidth="3" />
-            <path d="M32 49v7" stroke={ACCENT} strokeWidth="3" />
-            <path d="M22 56h20" stroke={ACCENT} strokeWidth="3" />
-            <path d="M16 38l9-9 7 5 13-14" stroke={ACCENT_BRIGHT} strokeWidth="3.2" />
-            <path d="M37 20h8v8" stroke={ACCENT_BRIGHT} strokeWidth="3.2" />
-          </svg>
+          <img src={MARK} alt="" style={{ width: 112, height: 112 }} />
           <div style={{ display: "flex", fontSize: 76, fontWeight: 800, letterSpacing: -2 }}>
             TAKEPROFIT
             <div
@@ -66,8 +60,8 @@ export default function Image() {
         </div>
 
         <div style={{ display: "flex", fontSize: 40, color: "#98a1ae", lineHeight: 1.35, maxWidth: 900 }}>
-          Futures trading community. Free Discord, content on YouTube, and the
-          best available discount on prop firm evaluations.
+          Day trading community, content and giveaways. Free prop firm accounts
+          given away in the Discord, every day.
         </div>
 
         <div style={{ display: "flex", alignItems: "center", gap: 24 }}>
@@ -86,7 +80,7 @@ export default function Image() {
             CODE {SITE.code}
           </div>
           <div style={{ display: "flex", fontSize: 32, color: "#98a1ae" }}>
-            discord · youtube
+            discord · youtube · x
           </div>
         </div>
       </div>
